@@ -45,7 +45,7 @@ const ResumeSection = () => {
       description: "Desenvolvimento de soluções em análise de dados, automação de processos, criação de dashboards e suporte à tomada de decisões estratégicas.",
     },
     {
-      period: "Jan/2024 - Mai/2025",
+      period: "2024 - Mai/2025",
       startDate: "2024-01-01",
       endDate: "2024-05-31",
       title: "Estagiário - Equipe de Dados",
@@ -53,7 +53,7 @@ const ResumeSection = () => {
       description: "Desenvolvimento de scripts em Python, extração de dados com SQL, criação de dashboards com Power BI e Qlik Sense.",
     },
     {
-      period: "2022 - Jan/2024",
+      period: "2022 - 2023",
       startDate: "2022-01-01",
       endDate: "2024-01-31",
       title: "Recepcionista",
