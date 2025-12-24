@@ -1,8 +1,9 @@
 // ContactSection.tsx
 import { useState } from "react";
-import { Mail, Send, Loader2 } from "lucide-react";
+import { Mail, Send, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import memojiThinking from "@/assets/memoji-thinking.png";
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const ContactSection = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -20,24 +22,42 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    // Cria o corpo do email
-    const mailtoLink = `mailto:andrerupertodev@gmail.com?subject=${encodeURIComponent(
-      formData.subject
-    )}&body=${encodeURIComponent(
-      `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMensagem:\n${formData.message}`
-    )}`;
+    try {
+      // Substitua pelos seus IDs do EmailJS
+      const result = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'andrerupertodev@gmail.com'
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
 
-    // Abre o cliente de email
-    window.location.href = mailtoLink;
-
-    setTimeout(() => {
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        
+        // Limpa a mensagem de sucesso após 5 segundos
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar email:', error);
+      setSubmitStatus('error');
+      
+      // Limpa a mensagem de erro após 5 segundos
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
       setIsSubmitting(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 1000);
+    }
   };
 
   return (
@@ -141,6 +161,21 @@ const ContactSection = () => {
                   </>
                 )}
               </Button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="flex items-center gap-2 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Mensagem enviada com sucesso! Responderei em breve.</span>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="flex items-center gap-2 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500">
+                  <XCircle className="w-5 h-5" />
+                  <span>Erro ao enviar mensagem. Tente novamente ou use o email direto.</span>
+                </div>
+              )}
             </form>
 
             {/* Direct contact */}

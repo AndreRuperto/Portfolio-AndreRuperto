@@ -26,3 +26,5 @@ dist-ssr
 node_modules
 src/assets/resultado
 src/assets/*.py
+
+.env
