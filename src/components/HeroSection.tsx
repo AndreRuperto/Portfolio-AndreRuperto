@@ -1,11 +1,53 @@
-import { Github, Linkedin, Mail, Download, Sparkles } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Github, Linkedin, Mail, Download, Sparkles, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import introVideo from "@/assets/intro-video.mp4";
-import memojiLaptop from "@/assets/memoji-laptop.png";
+import memojiJoia from "@/assets/memoji-joia.png";
 
 const HeroSection = () => {
+  const [hasPlayed, setHasPlayed] = useState(false);
+  const [showPlayButton, setShowPlayButton] = useState(true);
+  const videoRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPlayed) {
+            setShowPlayButton(true);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [hasPlayed]);
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+      setShowPlayButton(false);
+      setHasPlayed(false);
+    }
+  };
+
+  const handleVideoEnded = () => {
+    setHasPlayed(true);
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -35,7 +77,7 @@ const HeroSection = () => {
 
             {/* Description */}
             <p className="text-muted-foreground max-w-md mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Estudante de Ciência da Computação focado em Ciência de Dados, 
+              Recém-formado em Ciência da Computação focado em Ciência de Dados, 
               Machine Learning e Automação de Processos. Transformando dados em decisões inteligentes.
             </p>
 
@@ -45,7 +87,7 @@ const HeroSection = () => {
                 <a href="#about">Sobre mim</a>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <a href="/Curriculo-Andre-Ruperto.pdf" download>
+                <a href="https://drive.google.com/uc?export=download&id=13ebKX8BRVUf7k8VEvmUaJjqs8TXd9Y_x" download>
                   <Download className="w-4 h-4" />
                   Download CV
                 </a>
@@ -79,24 +121,43 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right content - Video */}
+          {/* Right content - Video/Image */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in-right" style={{ animationDelay: "0.3s" }}>
             <div className="relative w-80 h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]">
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl animate-pulse" />
               
-              {/* Video container */}
+              {/* Video/Image container */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/30">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                >
-                  <source src={introVideo} type="video/mp4" />
-                  <img src={memojiLaptop} alt="André Ruperto" className="w-full h-full object-cover" />
-                </video>
+                {!hasPlayed ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      playsInline
+                      onEnded={handleVideoEnded}
+                      className="w-full h-full object-cover"
+                    >
+                      <source src={introVideo} type="video/mp4" />
+                    </video>
+                    
+                    {showPlayButton && (
+                      <button
+                        onClick={handlePlayClick}
+                        className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
+                      >
+                        <div className="w-20 h-20 rounded-full bg-primary/90 hover:bg-primary flex items-center justify-center transition-all hover:scale-110">
+                          <Play className="w-10 h-10 text-background ml-1" fill="currentColor" />
+                        </div>
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <img 
+                    src={memojiJoia} 
+                    alt="André Ruperto" 
+                    className="w-full h-full object-cover" 
+                  />
+                )}
               </div>
             </div>
           </div>

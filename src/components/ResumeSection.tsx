@@ -2,24 +2,60 @@ import { Briefcase, GraduationCap } from "lucide-react";
 import memojiIdea from "@/assets/memoji-idea.png";
 
 const ResumeSection = () => {
+  // Função para calcular a duração
+  const calculateDuration = (startDate: string, endDate: string | null) => {
+    const start = new Date(startDate);
+    const end = endDate ? new Date(endDate) : new Date();
+    
+    const months = (end.getFullYear() - start.getFullYear()) * 12 + 
+                   (end.getMonth() - start.getMonth());
+    
+    if (months < 12) {
+      return `(${months} ${months === 1 ? 'mês' : 'meses'})`;
+    }
+    
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+    
+    if (remainingMonths === 0) {
+      return `(${years} ${years === 1 ? 'ano' : 'anos'})`;
+    }
+    
+    return `(${years} ${years === 1 ? 'ano' : 'anos'} e ${remainingMonths} ${remainingMonths === 1 ? 'mês' : 'meses'})`;
+  };
+
   const education = [
     {
       period: "2022 - 2025",
+      startDate: "2022-01-01",
+      endDate: "2025-12-31",
       title: "Graduação em Ciência da Computação",
       institution: "UDF (Centro Universitário do Distrito Federal)",
-      description: "Cursando o 7º semestre com foco em Ciência de Dados e Machine Learning.",
+      description: "Formado com nota 10 no TCC, focado em Ciência de Dados e Machine Learning.",
     },
   ];
 
   const experience = [
     {
-      period: "2024 - Atual",
+      period: "Mai/2025 - Atual",
+      startDate: "2024-05-01",
+      endDate: null,
+      title: "Analista de Dados Júnior",
+      company: "Resende Mori Hutchison",
+      description: "Desenvolvimento de soluções em análise de dados, automação de processos, criação de dashboards e suporte à tomada de decisões estratégicas.",
+    },
+    {
+      period: "Jan/2024 - Mai/2025",
+      startDate: "2024-01-01",
+      endDate: "2024-05-31",
       title: "Estagiário - Equipe de Dados",
       company: "Ministério da Gestão e da Inovação (MGI)",
       description: "Desenvolvimento de scripts em Python, extração de dados com SQL, criação de dashboards com Power BI e Qlik Sense.",
     },
     {
-      period: "2022 - 2024",
+      period: "2022 - Jan/2024",
+      startDate: "2022-01-01",
+      endDate: "2024-01-31",
       title: "Recepcionista",
       company: "Academia Blue+",
       description: "Atendimento ao público, gestão de pagamentos e implementação de melhorias nos processos internos.",
@@ -61,7 +97,9 @@ const ResumeSection = () => {
                   className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors"
                 >
                   <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] rounded-full bg-primary" />
-                  <span className="text-sm text-primary font-mono">{item.period}</span>
+                  <span className="text-sm text-primary font-mono">
+                    {item.period} {calculateDuration(item.startDate, item.endDate)}
+                  </span>
                   <h4 className="text-lg font-semibold mt-1">{item.title}</h4>
                   <p className="text-muted-foreground text-sm">{item.institution}</p>
                   <p className="text-muted-foreground mt-2">{item.description}</p>
@@ -101,7 +139,9 @@ const ResumeSection = () => {
                   className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors"
                 >
                   <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] rounded-full bg-primary" />
-                  <span className="text-sm text-primary font-mono">{item.period}</span>
+                  <span className="text-sm text-primary font-mono">
+                    {item.period} {calculateDuration(item.startDate, item.endDate)}
+                  </span>
                   <h4 className="text-lg font-semibold mt-1">{item.title}</h4>
                   <p className="text-muted-foreground text-sm">{item.company}</p>
                   <p className="text-muted-foreground mt-2">{item.description}</p>
