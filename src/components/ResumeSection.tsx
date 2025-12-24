@@ -94,7 +94,7 @@ const ResumeSection = () => {
               {education.map((item, i) => (
                 <div
                   key={i}
-                  className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors"
+                  className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors text-justify"
                 >
                   <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] rounded-full bg-primary" />
                   <span className="text-sm text-primary font-mono">
@@ -108,7 +108,7 @@ const ResumeSection = () => {
             </div>
 
             {/* Courses */}
-            <div className="mt-12">
+            <div className="mt-12 text-justify">
               <h4 className="text-lg font-semibold mb-4">Cursos Complementares</h4>
               <div className="flex flex-wrap gap-2">
                 {courses.map((course, i) => (
@@ -136,7 +136,7 @@ const ResumeSection = () => {
               {experience.map((item, i) => (
                 <div
                   key={i}
-                  className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors"
+                  className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors text-justify"
                 >
                   <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] rounded-full bg-primary" />
                   <span className="text-sm text-primary font-mono">
@@ -150,13 +150,13 @@ const ResumeSection = () => {
             </div>
 
             {/* Memoji decoration */}
-            <div className="mt-12 flex justify-center">
+            {/* <div className="mt-12 flex justify-center">
               <img
                 src={memojiIdea}
                 alt="Memoji"
                 className="w-32 h-32 object-contain opacity-80 animate-float"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

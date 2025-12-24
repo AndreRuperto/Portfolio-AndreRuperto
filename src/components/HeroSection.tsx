@@ -3,6 +3,7 @@ import { Github, Linkedin, Mail, Download, Sparkles, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import introVideo from "@/assets/intro-video.mp4";
 import memojiJoia from "@/assets/memoji-joia.png";
+import memojiHello from "@/assets/memoji-hello.png";
 
 const HeroSection = () => {
   const [hasPlayed, setHasPlayed] = useState(false);

@@ -24,9 +24,9 @@ const skills = {
     { name: "VS Code", icon: "vscode", custom: false },
     { name: "Figma", icon: "figma", custom: false },
     { name: "Vercel", icon: "vercel", custom: false },
-    { name: "Power BI", icon: "/src/assets/powerbi.svg", custom: true },
-    { name: "Qlik", icon: "/src/assets/qlik.svg", custom: true },
-    { name: "Airflow", icon: "/src/assets/airflow.svg", custom: true },
+    { name: "Power BI", icon: "../src/assets/powerbi.svg", custom: true },
+    { name: "Qlik", icon: "../src/assets/qlik.svg", custom: true },
+    { name: "Airflow", icon: "../src/assets/airflow.svg", custom: true },
   ],
   databases: [
     { name: "PostgreSQL", icon: "postgres", custom: false },

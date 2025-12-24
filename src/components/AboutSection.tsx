@@ -65,7 +65,7 @@ const AboutSection = () => {
               <span className="text-gradient">Soluções Inteligentes</span>
             </h2>
 
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4 text-muted-foreground text-justify">
               <p>
                 Sou o André, recém-formado em <strong className="text-foreground">Ciência da Computação</strong> pelo 
                 Centro Universitário UDF, com foco em <strong className="text-foreground">Ciência de Dados</strong> e 

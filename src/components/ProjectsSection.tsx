@@ -21,7 +21,7 @@ const projects = [
     title: "Dashboards Interativos",
     description: "Painéis de visualização de dados com Power BI e Qlik Sense.",
     tags: ["Power BI", "Qlik", "Data Viz"],
-    link: null,
+    link: "https://www.gov.br/pncp/pt-br/pncp/portais-integrados-ao-pncp",
     github: null,
   },
   {
