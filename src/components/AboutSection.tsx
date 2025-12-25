@@ -73,7 +73,7 @@ const AboutSection = () => {
               </p>
               
               <p>
-                Atualmente atuo como <strong className="text-foreground">Analista de Dados Júnior</strong> na 
+                Atualmente, atuo como <strong className="text-foreground">Analista de Dados Júnior</strong> na 
                 <strong className="text-foreground"> Resende Mori Hutchison</strong>, onde desenvolvo soluções de análise 
                 de dados, automação de processos e criação de dashboards para suporte à tomada de decisões estratégicas.
               </p>

@@ -6,6 +6,7 @@ import ResumeSection from "@/components/ResumeSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
+import GithubActivity from '@/components/GithubActivity';
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <ResumeSection />
         <SkillsSection />
         <ProjectsSection />
+        <GithubActivity />
         <ContactSection />
       </main>
     </div>

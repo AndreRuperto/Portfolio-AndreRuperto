@@ -51,15 +51,7 @@ const ResumeSection = () => {
       title: "Estagiário - Equipe de Dados",
       company: "Ministério da Gestão e da Inovação (MGI)",
       description: "Desenvolvimento de scripts em Python, extração de dados com SQL, criação de dashboards com Power BI e Qlik Sense.",
-    },
-    {
-      period: "2022 - 2023",
-      startDate: "2022-01-01",
-      endDate: "2024-01-31",
-      title: "Recepcionista",
-      company: "Academia Blue+",
-      description: "Atendimento ao público, gestão de pagamentos e implementação de melhorias nos processos internos.",
-    },
+    }
   ];
 
   const courses = [
