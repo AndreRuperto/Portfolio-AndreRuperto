@@ -38,7 +38,7 @@ const ResumeSection = () => {
   const experience = [
     {
       period: "Mai/2025 - Atual",
-      startDate: "2024-05-01",
+      startDate: "2025-05-12",
       endDate: null,
       title: "Analista de Dados Júnior",
       company: "Resende Mori Hutchison",
@@ -47,7 +47,7 @@ const ResumeSection = () => {
     {
       period: "2024 - Mai/2025",
       startDate: "2024-01-01",
-      endDate: "2024-05-31",
+      endDate: "2025-05-09",
       title: "Estagiário - Equipe de Dados",
       company: "Ministério da Gestão e da Inovação (MGI)",
       description: "Desenvolvimento de scripts em Python, extração de dados com SQL, criação de dashboards com Power BI e Qlik Sense.",
