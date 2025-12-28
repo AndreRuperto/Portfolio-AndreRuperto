@@ -7,7 +7,18 @@ const skills = {
     { name: "TypeScript", icon: "ts", custom: false },
     { name: "C/C++", icon: "cpp", custom: false },
     { name: "HTML/CSS", icon: "html", custom: false },
+  ],
+  frontend: [
+    { name: "React", icon: "react", custom: false },
+    { name: "Tailwind CSS", icon: "tailwind", custom: false },
+    { name: "Vite", icon: "vite", custom: false },
+    { name: "Figma", icon: "figma", custom: false },
+  ],
+  backend: [
     { name: "Node.js", icon: "nodejs", custom: false },
+    { name: "Bun", icon: "bun", custom: false },
+    { name: "Docker", icon: "docker", custom: false },
+    { name: "Postman", icon: "postman", custom: false },
   ],
   data: [
     { name: "TensorFlow", icon: "tensorflow", custom: false },
@@ -15,18 +26,15 @@ const skills = {
     { name: "Scikit-learn", icon: "sklearn", custom: false },
     { name: "OpenCV", icon: "opencv", custom: false },
     { name: "Selenium", icon: "selenium", custom: false },
+    { name: "Power BI", icon: "../src/assets/powerbi.svg", custom: true },
+    { name: "Qlik", icon: "../src/assets/qlik.svg", custom: true },
+    { name: "Airflow", icon: "../src/assets/airflow.svg", custom: true },
   ],
   tools: [
     { name: "Git", icon: "git", custom: false },
     { name: "GitHub", icon: "github", custom: false },
-    { name: "Docker", icon: "docker", custom: false },
-    { name: "Postman", icon: "postman", custom: false },
     { name: "VS Code", icon: "vscode", custom: false },
-    { name: "Figma", icon: "figma", custom: false },
     { name: "Vercel", icon: "vercel", custom: false },
-    { name: "Power BI", icon: "../src/assets/powerbi.svg", custom: true },
-    { name: "Qlik", icon: "../src/assets/qlik.svg", custom: true },
-    { name: "Airflow", icon: "../src/assets/airflow.svg", custom: true },
   ],
   databases: [
     { name: "PostgreSQL", icon: "postgres", custom: false },
@@ -38,6 +46,8 @@ const skills = {
 const SkillsSection = () => {
   const [expandedSections, setExpandedSections] = useState({
     languages: false,
+    frontend: false,
+    backend: false,
     data: false,
     tools: false,
     databases: false,
@@ -92,7 +102,7 @@ const SkillsSection = () => {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Languages */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-center mb-6">Linguagens</h3>
@@ -101,9 +111,25 @@ const SkillsSection = () => {
             </div>
           </div>
 
+          {/* Frontend */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-center mb-6">Frontend</h3>
+            <div className="space-y-3">
+              {renderSkills(skills.frontend, 'frontend')}
+            </div>
+          </div>
+
+          {/* Backend */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-center mb-6">Backend</h3>
+            <div className="space-y-3">
+              {renderSkills(skills.backend, 'backend')}
+            </div>
+          </div>
+
           {/* Data Science & ML */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Machine Learning & IA</h3>
+            <h3 className="text-lg font-semibold text-center mb-6">Data Science & ML</h3>
             <div className="space-y-3">
               {renderSkills(skills.data, 'data')}
             </div>
