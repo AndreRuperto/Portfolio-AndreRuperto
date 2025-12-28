@@ -9,7 +9,7 @@ const GithubActivity: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Título da Seção */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient">
-          📈 Atividade GitHub
+          Atividade GitHub
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
           Acompanhe meu progresso e contribuições na plataforma

@@ -1,12 +1,14 @@
 // AboutSection.tsx
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Send } from "lucide-react";
+import { Send, Eye, User } from "lucide-react";
 import memojiJoia from "@/assets/memoji-joia.png";
+import fotoProfissional from "@/assets/foto-profissional.jpeg";
 
 const AboutSection = () => {
   const [yearsOfExperience, setYearsOfExperience] = useState("1.5");
   const [projectsCount, setProjectsCount] = useState("15");
+  const [showRealPhoto, setShowRealPhoto] = useState(false);
 
   useEffect(() => {
     const startDate = new Date("2024-01-01");
@@ -46,12 +48,29 @@ const AboutSection = () => {
               <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
               
               {/* Main image */}
-              <div className="relative bg-card rounded-3xl p-8 border border-border">
+              <div className="relative bg-card rounded-3xl p-8 border border-border transition-all duration-500">
                 <img
-                  src={memojiJoia}
+                  src={showRealPhoto ? fotoProfissional : memojiJoia}
                   alt="André Ruperto"
-                  className="w-64 h-64 md:w-80 md:h-80 object-contain mx-auto animate-float"
+                  className={`mx-auto transition-all duration-500 ${
+                    showRealPhoto 
+                      ? 'w-full max-w-md h-auto object-cover rounded-2xl' 
+                      : 'w-64 h-64 md:w-80 md:h-80 object-contain animate-float'
+                  }`}
                 />
+                
+                {/* Toggle button */}
+                <button
+                  onClick={() => setShowRealPhoto(!showRealPhoto)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 transition-colors"
+                  aria-label={showRealPhoto ? "Ver memoji" : "Ver foto real"}
+                >
+                  {showRealPhoto ? (
+                    <User className="w-5 h-5 text-primary" />
+                  ) : (
+                    <Eye className="w-5 h-5 text-primary" />
+                  )}
+                </button>
               </div>
             </div>
           </div>
