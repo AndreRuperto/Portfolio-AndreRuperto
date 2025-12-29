@@ -20,8 +20,7 @@
     "backend:migrate": "cd backend && npm run migrate",
     "backend:generate": "cd backend && npm run generate",
     "deploy:local": "concurrently \"npm run dev\" \"npm run backend:dev\"",
-    "deploy:prod": "npm run build:prod",
-    "postinstall": "npm run backend:install"
+    "deploy:prod": "npm run build:prod"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
