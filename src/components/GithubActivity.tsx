@@ -11,13 +11,12 @@ const GithubActivity: React.FC = () => {
   return (
     <section className="w-full py-16 px-4 bg-background">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gradient">
-          Atividade GitHub
-        </h2>
-
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Acompanhe meu progresso e contribuições na plataforma
-        </p>
+        <div className="text-center mb-16">
+          <span className="section-title">Github</span>
+          <h2 className="heading-md">
+            Atividade <span className="text-gradient">Github</span>
+          </h2>
+        </div>
 
         <div className="flex flex-col items-center gap-8">
           {showGraph && (
