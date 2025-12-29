@@ -1,3 +1,4 @@
+// src/components/ProjectsSection.tsx
 import { ExternalLink, Github, Eye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import memojiFist from "@/assets/memoji-fist.png";
@@ -19,6 +20,8 @@ interface Project {
   order: number;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || '/api';
+
 const ProjectsSection = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [openImage, setOpenImage] = useState<string | null>(null);
@@ -27,7 +30,7 @@ const ProjectsSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/projects');
+        const response = await fetch(`${API_URL}/projects`);
         const data = await response.json();
         setProjects(data);
       } catch (error) {

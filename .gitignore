@@ -28,3 +28,10 @@ src/assets/resultado
 src/assets/*.py
 
 .env
+
+# .gitignore
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
