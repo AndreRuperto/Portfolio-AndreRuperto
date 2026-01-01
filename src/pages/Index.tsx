@@ -7,6 +7,8 @@ import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import GithubActivity from '@/components/GithubActivity';
+import WhySiteSection from "@/components/WhySiteSection";
+import DifferentialsSection from "@/components/DifferentialsSection";
 
 const Index = () => {
   return (
@@ -20,6 +22,8 @@ const Index = () => {
         <SkillsSection />
         <ProjectsSection />
         <GithubActivity />
+        <WhySiteSection />
+        <DifferentialsSection />
         <ContactSection />
       </main>
     </div>

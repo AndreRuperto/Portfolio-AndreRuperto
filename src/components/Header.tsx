@@ -8,6 +8,8 @@ const navItems = [
   { label: "Currículo", href: "#resume" },
   { label: "Skills", href: "#skills" },
   { label: "Projetos", href: "#projects" },
+  { label: "Por que um site?", href: "#why-site" },
+  { label: "Diferenciais", href: "#differentials" },
   { label: "Contato", href: "#contact" },
 ];
 
