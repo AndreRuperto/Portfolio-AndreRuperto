@@ -88,7 +88,7 @@ const HeroSection = () => {
                 <a href="#about">Sobre mim</a>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <a href="https://drive.google.com/uc?export=download&id=13ebKX8BRVUf7k8VEvmUaJjqs8TXd9Y_x" download>
+                <a href="https://drive.google.com/uc?export=download&id=1xpgYelvpG66mXmI7kdhxr_4kGh00t6VQ" download>
                   <Download className="w-4 h-4" />
                   Download CV
                 </a>
