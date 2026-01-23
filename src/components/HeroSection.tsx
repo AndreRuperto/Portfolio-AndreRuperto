@@ -72,13 +72,13 @@ const HeroSection = () => {
                 <span className="text-gradient">André Ruperto</span>
               </h1>
               <h2 className="text-xl md:text-2xl text-muted-foreground tracking-wider">
-                Cientista de Dados & Desenvolvedor
+                Desenvolvedor & Cientista de Dados 
               </h2>
             </div>
 
             {/* Description */}
             <p className="text-muted-foreground max-w-md mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Recém-formado em Ciência da Computação focado em Ciência de Dados, 
+              Recém-formado em Ciência da Computação focado em Desenvolvimento, Ciência de Dados, 
               Machine Learning e Automação de Processos. Transformando dados em decisões inteligentes.
             </p>
 
