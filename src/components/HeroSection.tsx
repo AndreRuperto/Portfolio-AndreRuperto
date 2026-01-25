@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { Github, Linkedin, Mail, Download, Sparkles, Play } from "lucide-react";
+import { Github, Linkedin, Mail, Download, Sparkles, Play, FileText, Globe, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import introVideo from "@/assets/intro-video.mp4";
 import memojiJoia from "@/assets/memoji-joia.png";
 import memojiHello from "@/assets/memoji-hello.png";
+import apresentacao from "@/assets/André Ruperto - Apresentação.pdf";
+import site from "@/assets/Importância de um Site.pdf";
 
 const HeroSection = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
@@ -78,21 +80,38 @@ const HeroSection = () => {
 
             {/* Description */}
             <p className="text-muted-foreground max-w-md mx-auto lg:mx-0 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              Recém-formado em Ciência da Computação focado em Desenvolvimento, Ciência de Dados, 
+              Formado em Ciência da Computação focado em Desenvolvimento, Ciência de Dados, 
               Machine Learning e Automação de Processos. Transformando dados em decisões inteligentes.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <Button variant="hero" size="lg" asChild>
-                <a href="#about">Sobre mim</a>
-              </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <a href="https://drive.google.com/uc?export=download&id=1xpgYelvpG66mXmI7kdhxr_4kGh00t6VQ" download>
-                  <Download className="w-4 h-4" />
-                  Download CV
-                </a>
-              </Button>
+            <div className="space-y-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <Button variant="hero" size="lg" asChild>
+                  <a href={apresentacao} target="_blank" rel="noopener noreferrer">
+                    <FileText className="w-4 h-4" />
+                    Apresentação
+                  </a>
+                </Button>
+                <Button variant="heroOutline" size="lg" asChild>
+                  <a href={site} target="_blank" rel="noopener noreferrer">
+                    <Globe className="w-4 h-4" />
+                    Importância de um Site
+                  </a>
+                </Button>
+              </div>
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <Button variant="heroOutline" size="lg">
+                  <DollarSign className="w-4 h-4" />
+                  Valores
+                </Button>
+                <Button variant="heroOutline" size="lg" asChild>
+                  <a href="https://drive.google.com/uc?export=download&id=1xpgYelvpG66mXmI7kdhxr_4kGh00t6VQ" download>
+                    <Download className="w-4 h-4" />
+                    Download CV
+                  </a>
+                </Button>
+              </div>
             </div>
 
             {/* Social links */}

@@ -86,7 +86,7 @@ const AboutSection = () => {
 
             <div className="space-y-4 text-muted-foreground text-justify">
               <p>
-                Sou o André, recém-formado em <strong className="text-foreground">Ciência da Computação</strong> pelo 
+                Sou o André, formado em <strong className="text-foreground">Ciência da Computação</strong> pelo 
                 Centro Universitário UDF, com foco em <strong className="text-foreground">Ciência de Dados</strong> e 
                 <strong className="text-foreground"> Automatização de Processos</strong>.
               </p>
@@ -105,7 +105,7 @@ const AboutSection = () => {
               </p>
 
               <p>
-                Sou co-criador do projeto <strong className="text-foreground">Capi3D</strong> e apaixonado por 
+                Apaixonado por 
                 transformar dados em decisões inteligentes através de Machine Learning e análise de dados.
               </p>
             </div>
