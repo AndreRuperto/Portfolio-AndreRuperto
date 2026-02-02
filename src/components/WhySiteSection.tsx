@@ -41,12 +41,12 @@ const faqs = [
   {
     question: "O site funciona em celulares e tablets?",
     answer:
-      "Com certeza! Todos os sites são desenvolvidos com design responsivo, garantindo uma experiência otimizada em qualquer dispositivo — desktop, tablet ou smartphone.",
+      "Com certeza! Todos os sites são desenvolvidos com design responsivo, garantindo uma experiência otimizada em qualquer dispositivo: desktop, tablet ou smartphone.",
   },
   {
     question: "Quais tecnologias você utiliza?",
     answer:
-      "Trabalho com tecnologias modernas como React, TypeScript, Tailwind CSS e Node.js, o que garante sites rápidos, seguros e com excelente performance. Nada de templates prontos — cada projeto é desenvolvido do zero.",
+      "Trabalho com tecnologias modernas como React, TypeScript, Tailwind CSS e Node.js, o que garante sites rápidos, seguros e com excelente performance. Nada de templates prontos, cada projeto é desenvolvido do zero.",
   },
 ];
 
