@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
+# Portfólio - André Ruperto
 
-## Project info
+Portfólio pessoal de André Ruperto, Desenvolvedor e Cientista de Dados.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Sobre
 
-## How can I edit this code?
+Este é meu portfólio profissional, desenvolvido para apresentar meus projetos, habilidades e experiências na área de Desenvolvimento, Ciência de Dados, Machine Learning e Automação de Processos.
 
-There are several ways of editing your application.
+**Website**: [andreruperto.dev](https://andreruperto.dev)
 
-**Use Lovable**
+## Tecnologias Utilizadas
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **React** - Biblioteca JavaScript para construção de interfaces
+- **TypeScript** - Superset tipado do JavaScript
+- **Vite** - Build tool e dev server
+- **Tailwind CSS** - Framework CSS utility-first
+- **shadcn/ui** - Componentes UI reutilizáveis
+- **Lucide React** - Ícones
+- **Framer Motion** - Animações
 
-Changes made via Lovable will be committed automatically to this repo.
+## Funcionalidades
 
-**Use your preferred IDE**
+- Design responsivo e moderno
+- Seção de apresentação com vídeo introdutório
+- Portfólio de projetos
+- Atividade do GitHub em tempo real
+- Formulário de contato integrado
+- Download de CV e apresentação
+- Links para redes sociais
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Desenvolvimento Local
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Pré-requisitos
 
-Follow these steps:
+- Node.js (versão 18 ou superior)
+- npm ou yarn
+
+### Instalação
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone o repositório
+git clone https://github.com/AndreRuperto/portfolio-AndreRuperto.git
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Entre no diretório
+cd portfolio-AndreRuperto
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Instale as dependências
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Scripts Disponíveis
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run dev          # Inicia o servidor de desenvolvimento
+npm run build        # Cria a build de produção
+npm run preview      # Visualiza a build de produção
+npm run lint         # Executa o linter
+```
 
-**Use GitHub Codespaces**
+## Estrutura do Projeto
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+├── components/      # Componentes React
+│   ├── ui/         # Componentes UI do shadcn
+│   └── ...         # Componentes das seções
+├── pages/          # Páginas da aplicação
+├── assets/         # Imagens, vídeos e PDFs
+├── hooks/          # Custom hooks
+└── lib/            # Utilitários e configurações
+```
 
-## What technologies are used for this project?
+## Contato
 
-This project is built with:
+- **Email**: andreruperto@gmail.com
+- **LinkedIn**: [linkedin.com/in/andrerup](https://linkedin.com/in/andrerup)
+- **GitHub**: [github.com/AndreRuperto](https://github.com/AndreRuperto)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Licença
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+© 2026 André Ruperto. Todos os direitos reservados.

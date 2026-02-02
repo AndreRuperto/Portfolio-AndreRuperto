@@ -1,5 +1,54 @@
 // src/components/WhySiteSection.tsx
 import { Globe, TrendingUp, Shield, Search, Users, Zap } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const faqs = [
+  {
+    question: "Quanto custa para fazer um site?",
+    answer:
+      "Cada projeto é único e o valor depende da complexidade, quantidade de páginas e funcionalidades desejadas. Após uma conversa inicial para entender suas necessidades, envio uma proposta detalhada e transparente.",
+  },
+  {
+    question: "Meu site vai aparecer no Google?",
+    answer:
+      "Sim! Todos os sites que desenvolvo seguem as melhores práticas de SEO desde a estrutura do código até a otimização de performance. Isso garante que seu site seja indexado corretamente pelos principais buscadores como Google, Bing e Yahoo.",
+  },
+  {
+    question: "Como funciona o processo de criação?",
+    answer:
+      "O processo é simples e direto: (1) conversa inicial para entender o projeto, (2) envio da proposta e contrato, (3) briefing detalhado sobre conteúdo e identidade visual, (4) desenvolvimento com acompanhamento, (5) revisão e aprovação final.",
+  },
+  {
+    question: "Existe algum custo mensal após a entrega?",
+    answer:
+      "Para sites de pagamento único, o único custo recorrente é o de hospedagem e domínio, que fica por conta do cliente. Também ofereço planos de manutenção mensal que incluem atualizações, backups e suporte técnico contínuo.",
+  },
+  {
+    question: "Qual o prazo de entrega?",
+    answer:
+      "Sites institucionais de até 5 páginas são entregues em até 15 dias após a aprovação da proposta e recebimento do conteúdo. Projetos mais complexos, com funcionalidades específicas, podem levar de 15 a 30 dias.",
+  },
+  {
+    question: "Domínio e hospedagem estão inclusos?",
+    answer:
+      "Não estão inclusos no valor do projeto, mas oriento na escolha da melhor opção de hospedagem e domínio de acordo com as necessidades do seu negócio, e faço toda a configuração técnica.",
+  },
+  {
+    question: "O site funciona em celulares e tablets?",
+    answer:
+      "Com certeza! Todos os sites são desenvolvidos com design responsivo, garantindo uma experiência otimizada em qualquer dispositivo — desktop, tablet ou smartphone.",
+  },
+  {
+    question: "Quais tecnologias você utiliza?",
+    answer:
+      "Trabalho com tecnologias modernas como React, TypeScript, Tailwind CSS e Node.js, o que garante sites rápidos, seguros e com excelente performance. Nada de templates prontos — cada projeto é desenvolvido do zero.",
+  },
+];
 
 const WhySiteSection = () => {
   const benefits = [
@@ -87,6 +136,24 @@ const WhySiteSection = () => {
               <b>Solicitar Orçamento</b>
             </a>
           </div>
+        </div>
+
+        <div className="mt-20 max-w-3xl mx-auto">
+          <h3 className="text-2xl font-bold mb-8 text-center">
+            Perguntas <span className="text-gradient">Frequentes</span>
+          </h3>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`faq-${index}`} className="border-border">
+                <AccordionTrigger className="text-left text-base hover:text-primary hover:no-underline">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>

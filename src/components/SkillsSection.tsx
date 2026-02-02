@@ -26,9 +26,9 @@ const skills = {
     { name: "Scikit-learn", icon: "sklearn", custom: false },
     { name: "OpenCV", icon: "opencv", custom: false },
     { name: "Selenium", icon: "selenium", custom: false },
-    { name: "Power BI", icon: "../src/assets/powerbi.svg", custom: true },
-    { name: "Qlik", icon: "../src/assets/qlik.svg", custom: true },
-    { name: "Airflow", icon: "../src/assets/airflow.svg", custom: true },
+    { name: "Power BI", icon: "../src/assets/icons/powerbi.svg", custom: true },
+    { name: "Qlik", icon: "../src/assets/icons/qlik.svg", custom: true },
+    { name: "Airflow", icon: "../src/assets/icons/airflow.svg", custom: true },
   ],
   tools: [
     { name: "Git", icon: "git", custom: false },

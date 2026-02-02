@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Mail, Send, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import memojiThinking from "@/assets/memoji-thinking.png";
+import memojiThinking from "@/assets/images/memoji-thinking.png";
 import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
@@ -37,7 +37,7 @@ const ContactSection = () => {
           from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          to_email: 'andrerupertodev@gmail.com'
+          to_email: 'contato@andreruperto.dev'
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
@@ -185,10 +185,10 @@ const ContactSection = () => {
                 <div>
                   <p className="text-sm">Email direto</p>
                   <a
-                    href="mailto:andrerupertodev@gmail.com"
+                    href="mailto:contato@andreruperto.dev"
                     className="text-foreground hover:text-primary transition-colors"
                   >
-                    andrerupertodev@gmail.com
+                    contato@andreruperto.dev
                   </a>
                 </div>
               </div>

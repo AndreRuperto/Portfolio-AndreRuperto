@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Send, Eye, User } from "lucide-react";
-import memojiJoia from "@/assets/memoji-joia.png";
-import fotoProfissional from "@/assets/foto-profissional.jpeg";
+import memojiJoia from "@/assets/images/memoji-joia.png";
+import fotoProfissional from "@/assets/images/foto-profissional.jpeg";
 
 const AboutSection = () => {
   const [yearsOfExperience, setYearsOfExperience] = useState("1.5");
