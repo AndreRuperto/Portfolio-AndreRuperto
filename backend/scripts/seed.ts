@@ -93,17 +93,6 @@ const projects = [
     links: [],
     github: "https://github.com/AndreRuperto/whatsapp_gastos_ai",
     order: 9
-  },
-  {
-    title: "Capi3D",
-    description: "Plataforma de visualização e modelagem 3D. Co-criador do projeto.",
-    tags: ["Python", "3D", "Web"],
-    image: null,
-    links: [
-      { url: "https://capi3d.com.br/", label: "Site" }
-    ],
-    github: null,
-    order: 10
   }
 ];
 
