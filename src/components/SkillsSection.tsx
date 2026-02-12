@@ -53,16 +53,24 @@ const SkillsSection = () => {
     databases: false,
   });
 
-  const toggleSection = (section) => {
+  type SectionKey = keyof typeof expandedSections;
+
+  const toggleSection = (section: SectionKey) => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section]
     }));
   };
 
-  const renderSkills = (skillsArray, sectionKey, limit = 5) => {
-    const displayedSkills = expandedSections[sectionKey] 
-      ? skillsArray 
+  interface Skill {
+    name: string;
+    icon: string;
+    custom: boolean;
+  }
+
+  const renderSkills = (skillsArray: Skill[], sectionKey: SectionKey, limit = 5) => {
+    const displayedSkills = expandedSections[sectionKey]
+      ? skillsArray
       : skillsArray.slice(0, limit);
 
     return (
@@ -72,7 +80,7 @@ const SkillsSection = () => {
             key={i}
             className="flex items-center gap-3 p-3 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:-translate-y-0.5"
           >
-            <img 
+            <img
               src={skill.custom ? skill.icon : `https://skillicons.dev/icons?i=${skill.icon}`}
               alt={skill.name}
               className="w-8 h-8"

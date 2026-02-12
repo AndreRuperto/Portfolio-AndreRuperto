@@ -5,7 +5,6 @@ const GithubActivity: React.FC = () => {
   const theme = 'merko';
 
   const [showGraph, setShowGraph] = useState(true);
-  const [showStreak, setShowStreak] = useState(true);
   const [showSnake, setShowSnake] = useState(true);
 
   return (

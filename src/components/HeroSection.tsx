@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Instagram, Download, Sparkles, Play, FileText, 
 import { Button } from "@/components/ui/button";
 import introVideo from "@/assets/videos/intro-video.mp4";
 import memojiJoia from "@/assets/images/memoji-joia.png";
-import memojiHello from "@/assets/images/memoji-hello.png";
+
 import apresentacao from "@/assets/pdfs/André Ruperto - Apresentação.pdf";
 import site from "@/assets/pdfs/Importância de um Site.pdf";
 
@@ -14,6 +14,8 @@ const HeroSection = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const currentRef = sectionRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -25,13 +27,13 @@ const HeroSection = () => {
       { threshold: 0.5 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [hasPlayed]);

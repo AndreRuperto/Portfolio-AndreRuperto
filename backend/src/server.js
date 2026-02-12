@@ -7,6 +7,7 @@ import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
 
 // Carrega o .env correto baseado no NODE_ENV
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env';
@@ -20,7 +21,39 @@ const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
+
+// Rate limiters
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 5,
+  message: { error: 'Muitas tentativas de login. Tente novamente em 15 minutos.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const contactLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hora
+  max: 5,
+  message: { error: 'Muitas mensagens enviadas. Tente novamente mais tarde.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// HTML escape para prevenir XSS em templates de email
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// Validação de email
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 // Middleware de autenticação
 const authMiddleware = (req, res, next) => {
@@ -34,7 +67,7 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret-key-change-in-production');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded.id;
     next();
   } catch (error) {
@@ -44,6 +77,11 @@ const authMiddleware = (req, res, next) => {
 
 // Email Templates
 function buildNotificationEmail({ name, email, subject, message }) {
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeSubject = escapeHtml(subject);
+  const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
+
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +109,7 @@ function buildNotificationEmail({ name, email, subject, message }) {
                   <td style="color: #F97316; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; padding-bottom: 8px;">Nome</td>
                 </tr>
                 <tr>
-                  <td style="color: #FAF8F6; font-size: 16px; padding: 14px 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${name}</td>
+                  <td style="color: #FAF8F6; font-size: 16px; padding: 14px 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${safeName}</td>
                 </tr>
               </table>
               <!-- Email -->
@@ -81,7 +119,7 @@ function buildNotificationEmail({ name, email, subject, message }) {
                 </tr>
                 <tr>
                   <td style="padding: 14px 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">
-                    <a href="mailto:${email}" style="color: #F97316; text-decoration: none; font-size: 16px;">${email}</a>
+                    <a href="mailto:${safeEmail}" style="color: #F97316; text-decoration: none; font-size: 16px;">${safeEmail}</a>
                   </td>
                 </tr>
               </table>
@@ -91,7 +129,7 @@ function buildNotificationEmail({ name, email, subject, message }) {
                   <td style="color: #F97316; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; padding-bottom: 8px;">Assunto</td>
                 </tr>
                 <tr>
-                  <td style="color: #FAF8F6; font-size: 16px; padding: 14px 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${subject}</td>
+                  <td style="color: #FAF8F6; font-size: 16px; padding: 14px 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${safeSubject}</td>
                 </tr>
               </table>
               <!-- Mensagem -->
@@ -100,7 +138,7 @@ function buildNotificationEmail({ name, email, subject, message }) {
                   <td style="color: #F97316; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; padding-bottom: 8px;">Mensagem</td>
                 </tr>
                 <tr>
-                  <td style="color: #FAF8F6; font-size: 15px; line-height: 1.7; padding: 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${message.replace(/\n/g, '<br>')}</td>
+                  <td style="color: #FAF8F6; font-size: 15px; line-height: 1.7; padding: 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${safeMessage}</td>
                 </tr>
               </table>
             </td>
@@ -120,6 +158,10 @@ function buildNotificationEmail({ name, email, subject, message }) {
 }
 
 function buildConfirmationEmail({ name, subject, message }) {
+  const safeName = escapeHtml(name);
+  const safeSubject = escapeHtml(subject);
+  const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
+
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -142,10 +184,10 @@ function buildConfirmationEmail({ name, subject, message }) {
           <tr>
             <td style="background-color: #1A1715; padding: 36px 40px; border: 1px solid #332D29; border-top: none;">
               <p style="color: #FAF8F6; font-size: 16px; line-height: 1.7; margin: 0 0 20px;">
-                E aí, <strong>${name}</strong>!
+                E aí, <strong>${safeName}</strong>!
               </p>
               <p style="color: #C4BBB3; font-size: 15px; line-height: 1.7; margin: 0 0 20px;">
-                Recebi sua mensagem sobre "<strong style="color: #FAF8F6;">${subject}</strong>" e vou te responder em até <strong style="color: #F97316;">24 horas</strong>.
+                Recebi sua mensagem sobre "<strong style="color: #FAF8F6;">${safeSubject}</strong>" e vou te responder em até <strong style="color: #F97316;">24 horas</strong>.
               </p>
 
               <!-- Resumo -->
@@ -154,7 +196,7 @@ function buildConfirmationEmail({ name, subject, message }) {
                   <td style="color: #F97316; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; padding-bottom: 8px;">Sua mensagem</td>
                 </tr>
                 <tr>
-                  <td style="color: #948C86; font-size: 14px; line-height: 1.7; padding: 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${message.replace(/\n/g, '<br>')}</td>
+                  <td style="color: #948C86; font-size: 14px; line-height: 1.7; padding: 16px; background-color: #252019; border-radius: 10px; border-left: 3px solid #F97316;">${safeMessage}</td>
                 </tr>
               </table>
 
@@ -202,13 +244,13 @@ function buildConfirmationEmail({ name, subject, message }) {
 }
 
 // Auth Routes
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', loginLimiter, (req, res) => {
   const { password } = req.body;
 
   if (password === process.env.ADMIN_PASSWORD) {
     const token = jwt.sign(
       { id: 'admin' },
-      process.env.JWT_SECRET || 'secret-key-change-in-production',
+      process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
 
@@ -254,7 +296,7 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-app.post('/api/projects', async (req, res) => {
+app.post('/api/projects', authMiddleware, async (req, res) => {
   try {
     const project = await prisma.project.create({
       data: req.body
@@ -266,7 +308,7 @@ app.post('/api/projects', async (req, res) => {
   }
 });
 
-app.put('/api/projects/:id', async (req, res) => {
+app.put('/api/projects/:id', authMiddleware, async (req, res) => {
   try {
     const project = await prisma.project.update({
       where: { id: parseInt(req.params.id) },
@@ -279,7 +321,7 @@ app.put('/api/projects/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/projects/:id', async (req, res) => {
+app.delete('/api/projects/:id', authMiddleware, async (req, res) => {
   try {
     await prisma.project.delete({
       where: { id: parseInt(req.params.id) }
@@ -292,13 +334,21 @@ app.delete('/api/projects/:id', async (req, res) => {
 });
 
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', contactLimiter, async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
 
-    // Validação básica
+    // Validação
     if (!name || !email || !subject || !message) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Email inválido' });
+    }
+
+    if (name.length > 100 || subject.length > 200 || message.length > 5000) {
+      return res.status(400).json({ error: 'Um ou mais campos excedem o tamanho máximo permitido' });
     }
 
     // 1. Enviar email de notificação para você (André)
@@ -316,7 +366,7 @@ app.post('/api/contact', async (req, res) => {
     }
 
     // 2. Enviar email de confirmação para quem enviou
-    const { data: confirmationData, error: confirmationError } = await resend.emails.send({
+    const { error: confirmationError } = await resend.emails.send({
       from: 'André Ruperto <contato@andreruperto.dev>',
       to: [email],
       subject: 'Recebi sua mensagem!',
@@ -325,7 +375,6 @@ app.post('/api/contact', async (req, res) => {
 
     if (confirmationError) {
       console.error('Erro ao enviar email de confirmação:', confirmationError);
-      // Não retorna erro aqui, pois o email principal já foi enviado
     }
 
     res.json({

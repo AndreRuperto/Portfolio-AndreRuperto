@@ -1,5 +1,5 @@
 import { Briefcase, GraduationCap } from "lucide-react";
-import memojiIdea from "@/assets/images/memoji-idea.png";
+
 
 const ResumeSection = () => {
   // Função para calcular a duração
