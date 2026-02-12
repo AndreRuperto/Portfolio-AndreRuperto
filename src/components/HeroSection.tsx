@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Github, Linkedin, Mail, Download, Sparkles, Play, FileText, Globe, DollarSign } from "lucide-react";
+import { Github, Linkedin, Mail, Instagram, Download, Sparkles, Play, FileText, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import introVideo from "@/assets/videos/intro-video.mp4";
 import memojiJoia from "@/assets/images/memoji-joia.png";
@@ -50,7 +50,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-12 md:pt-32 md:pb-20">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -63,9 +63,9 @@ const HeroSection = () => {
           {/* Left content */}
           <div className="space-y-8 text-center lg:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm text-muted-foreground">Vamos construir algo incrível juntos!</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-secondary border border-border animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+              <span className="text-xs md:text-sm text-muted-foreground">Vamos construir algo incrível juntos!</span>
             </div>
 
             {/* Name */}
@@ -85,30 +85,27 @@ const HeroSection = () => {
             </p>
 
             {/* Buttons */}
-            <div className="space-y-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Button variant="hero" size="lg" asChild>
+            <div className="space-y-3 md:space-y-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
+                <Button variant="hero" size="lg" className="flex-1 sm:flex-none" asChild>
                   <a href={apresentacao} target="_blank" rel="noopener noreferrer">
                     <FileText className="w-4 h-4" />
-                    Apresentação
+                    <span className="truncate">Apresentação</span>
                   </a>
                 </Button>
-                <Button variant="heroOutline" size="lg" asChild>
+                <Button variant="heroOutline" size="lg" className="flex-1 sm:flex-none whitespace-nowrap" asChild>
                   <a href={site} target="_blank" rel="noopener noreferrer">
                     <Globe className="w-4 h-4" />
-                    Importância de um Site
+                    <span className="hidden sm:inline">Importância de um Site</span>
+                    <span className="sm:hidden">Site</span>
                   </a>
                 </Button>
               </div>
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Button variant="heroOutline" size="lg">
-                  <DollarSign className="w-4 h-4" />
-                  Valores
-                </Button>
-                <Button variant="heroOutline" size="lg" asChild>
+              <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
+                <Button variant="heroOutline" size="lg" className="flex-1 sm:flex-none" asChild>
                   <a href="https://drive.google.com/uc?export=download&id=1xpgYelvpG66mXmI7kdhxr_4kGh00t6VQ" download>
                     <Download className="w-4 h-4" />
-                    Download CV
+                    Download Currículo
                   </a>
                 </Button>
               </div>
@@ -133,6 +130,14 @@ const HeroSection = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
+                href="https://instagram.com/andreruperto.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-secondary border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
                 href="mailto:andreruperto@gmail.com"
                 className="p-3 rounded-full bg-secondary border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300"
               >
@@ -143,7 +148,7 @@ const HeroSection = () => {
 
           {/* Right content - Video/Image */}
           <div className="relative flex justify-center lg:justify-end animate-fade-in-right" style={{ animationDelay: "0.3s" }}>
-            <div className="relative w-80 h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]">
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl animate-pulse" />
               

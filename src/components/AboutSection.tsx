@@ -38,9 +38,9 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" className="py-12 md:py-20 lg:py-24 relative">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Image */}
           <div className="relative flex justify-center order-2 lg:order-1">
             <div className="relative">
@@ -48,14 +48,14 @@ const AboutSection = () => {
               <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
               
               {/* Main image */}
-              <div className="relative bg-card rounded-3xl p-8 border border-border transition-all duration-500">
+              <div className="relative bg-card rounded-3xl p-4 sm:p-6 md:p-8 border border-border transition-all duration-500">
                 <img
                   src={showRealPhoto ? fotoProfissional : memojiJoia}
                   alt="André Ruperto"
                   className={`mx-auto transition-all duration-500 ${
-                    showRealPhoto 
-                      ? 'w-full max-w-md h-auto object-cover rounded-2xl' 
-                      : 'w-64 h-64 md:w-80 md:h-80 object-contain animate-float'
+                    showRealPhoto
+                      ? 'w-full max-w-md h-auto object-cover rounded-2xl'
+                      : 'w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 object-contain animate-float'
                   }`}
                 />
                 
@@ -76,7 +76,7 @@ const AboutSection = () => {
           </div>
 
           {/* Content */}
-          <div className="space-y-6 order-1 lg:order-2">
+          <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
             <span className="section-title">Sobre mim</span>
             
             <h2 className="heading-md">
@@ -111,14 +111,14 @@ const AboutSection = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-6 pt-6">
-              <div className="text-center p-4 rounded-xl bg-secondary border border-border">
-                <div className="text-3xl font-bold text-primary">+{yearsOfExperience}</div>
-                <div className="text-sm text-muted-foreground">Anos Exp.</div>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 pt-4 md:pt-6">
+              <div className="text-center p-3 md:p-4 rounded-xl bg-secondary border border-border">
+                <div className="text-2xl md:text-3xl font-bold text-primary">+{yearsOfExperience}</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Anos Exp.</div>
               </div>
-              <div className="text-center p-4 rounded-xl bg-secondary border border-border">
-                <div className="text-3xl font-bold text-primary">{projectsCount}</div>
-                <div className="text-sm text-muted-foreground">Projetos</div>
+              <div className="text-center p-3 md:p-4 rounded-xl bg-secondary border border-border">
+                <div className="text-2xl md:text-3xl font-bold text-primary">{projectsCount}</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Projetos</div>
               </div>
             </div>
 

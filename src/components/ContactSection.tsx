@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Mail, Send, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import memojiThinking from "@/assets/images/memoji-thinking.png";
-import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -28,31 +27,32 @@ const ContactSection = () => {
     setSubmitStatus('idle');
 
     try {
-      // Substitua pelos seus IDs do EmailJS
-      const result = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          to_email: 'contato@andreruperto.dev'
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+        }),
+      });
 
-      if (result.status === 200) {
+      if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", subject: "", message: "" });
-        
+
         // Limpa a mensagem de sucesso após 5 segundos
         setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        throw new Error('Erro ao enviar mensagem');
       }
     } catch (error) {
       console.error('Erro ao enviar email:', error);
       setSubmitStatus('error');
-      
+
       // Limpa a mensagem de erro após 5 segundos
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } finally {

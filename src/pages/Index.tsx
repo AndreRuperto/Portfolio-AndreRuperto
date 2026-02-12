@@ -9,6 +9,8 @@ import ContactSection from "@/components/ContactSection";
 import GithubActivity from '@/components/GithubActivity';
 import WhySiteSection from "@/components/WhySiteSection";
 import DifferentialsSection from "@/components/DifferentialsSection";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -26,6 +28,8 @@ const Index = () => {
         <DifferentialsSection />
         <ContactSection />
       </main>
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

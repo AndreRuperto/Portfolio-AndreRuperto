@@ -85,13 +85,13 @@ const WhySiteSection = () => {
   ];
 
   return (
-    <section id="why-site" className="py-24 bg-card/50">
+    <section id="why-site" className="py-12 md:py-20 lg:py-24 bg-card/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="section-title">Presença Digital</span>
+        <div className="text-center mb-10 md:mb-16">
+          <span className="section-title">Sua Vitrine Digital</span>
           <h2 className="heading-md">
-            Por que sua empresa precisa de um{" "}
-            <span className="text-gradient">site próprio?</span>
+            Por que sua empresa precisa de uma{" "}
+            <span className="text-gradient">vitrine digital?</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
             No Brasil, 93% dos consumidores pesquisam online antes de comprar. 
@@ -99,11 +99,11 @@ const WhySiteSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="group bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+              className="group bg-card rounded-2xl border border-border p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
@@ -120,26 +120,26 @@ const WhySiteSection = () => {
           ))}
         </div>
 
-        <div className="mt-16 max-w-3xl mx-auto text-center">
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
-            <h3 className="text-2xl font-bold mb-4">
+        <div className="mt-10 md:mt-16 max-w-3xl mx-auto text-center">
+          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">
               Pronto para transformar sua presença digital?
             </h3>
-            <p className="text-muted-foreground mb-6">
-              Desenvolvo sites profissionais, responsivos e otimizados para SEO. 
+            <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
+              Desenvolvo sites profissionais, responsivos e otimizados para SEO.
               Não fique para trás na era digital.
             </p>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors text-sm md:text-base"
             >
               <b>Solicitar Orçamento</b>
             </a>
           </div>
         </div>
 
-        <div className="mt-20 max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold mb-8 text-center">
+        <div className="mt-12 md:mt-20 max-w-3xl mx-auto">
+          <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-center">
             Perguntas <span className="text-gradient">Frequentes</span>
           </h3>
           <Accordion type="single" collapsible className="w-full">
