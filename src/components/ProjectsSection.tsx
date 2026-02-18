@@ -75,7 +75,7 @@ function FullPageViewer({ src, onClose }: { src: string; onClose: () => void }) 
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4"
+      className="fixed inset-0 z-[200] bg-black/90 flex flex-col items-center justify-center p-4"
       onClick={onClose}
     >
       <button
