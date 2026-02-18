@@ -38,3 +38,6 @@ src/assets/*.py
 .env.production
 
 backend/.env.production
+
+# Claude Code local settings
+.claude/settings.local.json
