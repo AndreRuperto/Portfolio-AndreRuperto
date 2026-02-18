@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Mail, Send, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import memojiThinking from "@/assets/images/memoji-thinking.png";
+import ScrollReveal from "./ScrollReveal";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -63,19 +64,22 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-24 bg-card/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="section-title">Contato</span>
-          <h2 className="heading-md">
-            Vamos trabalhar <span className="text-gradient">juntos?</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Estou disponível para projetos freelance de desenvolvimento web, análise de dados e automação. 
-            Entre em contato e vamos transformar suas ideias em realidade!
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="section-title">Contato</span>
+            <h2 className="heading-md">
+              Vamos trabalhar <span className="text-gradient">juntos?</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Estou disponível para projetos freelance de desenvolvimento web, análise de dados e automação.
+              Entre em contato e vamos transformar suas ideias em realidade!
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Form */}
+          <ScrollReveal variant="fade-right" delay={100}>
           <div className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -194,8 +198,10 @@ const ContactSection = () => {
               </div>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Image */}
+          <ScrollReveal variant="fade-left" delay={300}>
           <div className="relative flex justify-center lg:justify-end">
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
@@ -208,6 +214,7 @@ const ContactSection = () => {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

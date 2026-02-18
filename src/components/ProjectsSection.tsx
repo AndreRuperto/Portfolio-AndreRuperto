@@ -3,6 +3,7 @@ import { ExternalLink, Github, Eye, X, ChevronsDown, ChevronDown } from "lucide-
 import { Button } from "@/components/ui/button";
 import memojiFist from "@/assets/images/memoji-fist.png";
 import { useState, useEffect, useRef, useCallback } from "react";
+import ScrollReveal from "./ScrollReveal";
 
 interface ProjectLink {
   url: string;
@@ -190,17 +191,19 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="py-24 bg-card/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="section-title">Portfólio</span>
-          <h2 className="heading-md">
-            Projetos <span className="text-gradient">Recentes</span>
-          </h2>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="section-title">Portfólio</span>
+            <h2 className="heading-md">
+              Projetos <span className="text-gradient">Recentes</span>
+            </h2>
+          </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
+            <ScrollReveal key={project.id} delay={index * 150}>
             <div
-              key={project.id}
               className="group relative bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -257,9 +260,11 @@ const ProjectsSection = () => {
                 </div>
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
 
+        <ScrollReveal delay={200}>
         <div className="text-center mt-12">
           <div className="inline-flex items-center gap-4">
             <img src={memojiFist} alt="Memoji" className="w-16 h-16 object-contain" />
@@ -273,6 +278,7 @@ const ProjectsSection = () => {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </div>
 
       {openImage && (

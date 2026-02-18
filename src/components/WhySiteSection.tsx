@@ -1,5 +1,6 @@
 // src/components/WhySiteSection.tsx
 import { Globe, TrendingUp, Shield, Search, Users, Zap } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 import {
   Accordion,
   AccordionContent,
@@ -87,39 +88,43 @@ const WhySiteSection = () => {
   return (
     <section id="why-site" className="py-12 md:py-20 lg:py-24 bg-card/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10 md:mb-16">
-          <span className="section-title">Sua Vitrine Digital</span>
-          <h2 className="heading-md">
-            Por que sua empresa precisa de uma{" "}
-            <span className="text-gradient">vitrine digital?</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
-            No Brasil, 93% dos consumidores pesquisam online antes de comprar. 
-            Sem presença digital, sua empresa é invisível para boa parte do mercado.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-10 md:mb-16">
+            <span className="section-title">Sua Vitrine Digital</span>
+            <h2 className="heading-md">
+              Por que sua empresa precisa de uma{" "}
+              <span className="text-gradient">vitrine digital?</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
+              No Brasil, 93% dos consumidores pesquisam online antes de comprar.
+              Sem presença digital, sua empresa é invisível para boa parte do mercado.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="group bg-card rounded-2xl border border-border p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                  <benefit.icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-muted-foreground text-sm">
-                    {benefit.description}
-                  </p>
+            <ScrollReveal key={index} delay={index * 100}>
+              <div
+                className="group bg-card rounded-2xl border border-border p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                    <benefit.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
+                    <p className="text-muted-foreground text-sm">
+                      {benefit.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 
+        <ScrollReveal variant="scale" delay={200}>
         <div className="mt-10 md:mt-16 max-w-3xl mx-auto text-center">
           <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
             <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">
@@ -137,7 +142,9 @@ const WhySiteSection = () => {
             </a>
           </div>
         </div>
+        </ScrollReveal>
 
+        <ScrollReveal delay={100}>
         <div className="mt-12 md:mt-20 max-w-3xl mx-auto">
           <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-center">
             Perguntas <span className="text-gradient">Frequentes</span>
@@ -155,6 +162,7 @@ const WhySiteSection = () => {
             ))}
           </Accordion>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

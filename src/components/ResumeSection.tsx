@@ -1,4 +1,5 @@
 import { Briefcase, GraduationCap } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 
 const ResumeSection = () => {
@@ -65,16 +66,18 @@ const ResumeSection = () => {
   return (
     <section id="resume" className="py-24 bg-card/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="section-title">Currículo</span>
-          <h2 className="heading-md">
-            Educação & <span className="text-gradient">Experiência</span>
-          </h2>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="section-title">Currículo</span>
+            <h2 className="heading-md">
+              Educação & <span className="text-gradient">Experiência</span>
+            </h2>
+          </div>
+        </ScrollReveal>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Education */}
-          <div>
+          <ScrollReveal variant="fade-right" delay={100}><div>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
                 <GraduationCap className="w-6 h-6 text-primary" />
@@ -113,10 +116,10 @@ const ResumeSection = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </div></ScrollReveal>
 
           {/* Experience */}
-          <div>
+          <ScrollReveal variant="fade-left" delay={300}><div>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
                 <Briefcase className="w-6 h-6 text-primary" />
@@ -149,7 +152,7 @@ const ResumeSection = () => {
                 className="w-32 h-32 object-contain opacity-80 animate-float"
               />
             </div> */}
-          </div>
+          </div></ScrollReveal>
         </div>
       </div>
     </section>

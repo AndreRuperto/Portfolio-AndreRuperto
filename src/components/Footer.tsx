@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -36,6 +37,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-border bg-card/50">
       <div className="container mx-auto px-4 py-12">
+        <ScrollReveal>
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo / Nome */}
           <div className="flex flex-col items-center md:items-start gap-2">
@@ -76,6 +78,7 @@ const Footer = () => {
             ))}
           </div>
         </div>
+        </ScrollReveal>
 
         {/* Divider + Copyright */}
         <div className="mt-10 pt-6 border-t border-border text-center">

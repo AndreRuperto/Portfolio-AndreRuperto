@@ -1,4 +1,5 @@
 import { Briefcase, Target, GraduationCap, Code2, TrendingUp, MessageSquare } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 const differentials = [
   {
@@ -37,43 +38,46 @@ const DifferentialsSection = () => {
   return (
     <section id="differentials" className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="section-title">Diferenciais</span>
-          <h2 className="heading-md">
-            Por que trabalhar <span className="text-gradient">comigo?</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Desenvolvedor freelancer especializado em criar sites e sistemas web 
-            personalizados com qualidade profissional.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="section-title">Diferenciais</span>
+            <h2 className="heading-md">
+              Por que trabalhar <span className="text-gradient">comigo?</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Desenvolvedor freelancer especializado em criar sites e sistemas web
+              personalizados com qualidade profissional.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {differentials.map((item, i) => (
-            <div
-              key={i}
-              className="group relative bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-            >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              <div className="relative space-y-4">
-                {/* Icon */}
-                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
+            <ScrollReveal key={i} delay={i * 100}>
+              <div
+                className="group relative bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                {/* Content */}
-                <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
+                <div className="relative space-y-4">
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <item.icon className="w-6 h-6 text-primary" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

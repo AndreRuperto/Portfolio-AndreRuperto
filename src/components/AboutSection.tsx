@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Send, Eye, User } from "lucide-react";
 import memojiJoia from "@/assets/images/memoji-joia.png";
 import fotoProfissional from "@/assets/images/foto-profissional.jpeg";
+import ScrollReveal from "./ScrollReveal";
 
 const AboutSection = () => {
   const [yearsOfExperience, setYearsOfExperience] = useState("1.5");
@@ -42,41 +43,44 @@ const AboutSection = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Image */}
-          <div className="relative flex justify-center order-2 lg:order-1">
-            <div className="relative">
-              {/* Background decoration */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
-              
-              {/* Main image */}
-              <div className="relative bg-card rounded-3xl p-4 sm:p-6 md:p-8 border border-border transition-all duration-500">
-                <img
-                  src={showRealPhoto ? fotoProfissional : memojiJoia}
-                  alt="André Ruperto"
-                  className={`mx-auto transition-all duration-500 ${
-                    showRealPhoto
-                      ? 'w-full max-w-md h-auto object-cover rounded-2xl'
-                      : 'w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 object-contain animate-float'
-                  }`}
-                />
-                
-                {/* Toggle button */}
-                <button
-                  onClick={() => setShowRealPhoto(!showRealPhoto)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 transition-colors"
-                  aria-label={showRealPhoto ? "Ver memoji" : "Ver foto real"}
-                >
-                  {showRealPhoto ? (
-                    <User className="w-5 h-5 text-primary" />
-                  ) : (
-                    <Eye className="w-5 h-5 text-primary" />
-                  )}
-                </button>
+          <ScrollReveal variant="fade-right" delay={200} className="order-2 lg:order-1">
+            <div className="relative flex justify-center">
+              <div className="relative">
+                {/* Background decoration */}
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
+
+                {/* Main image */}
+                <div className="relative bg-card rounded-3xl p-4 sm:p-6 md:p-8 border border-border transition-all duration-500">
+                  <img
+                    src={showRealPhoto ? fotoProfissional : memojiJoia}
+                    alt="André Ruperto"
+                    className={`mx-auto transition-all duration-500 ${
+                      showRealPhoto
+                        ? 'w-full max-w-md h-auto object-cover rounded-2xl'
+                        : 'w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 object-contain animate-float'
+                    }`}
+                  />
+
+                  {/* Toggle button */}
+                  <button
+                    onClick={() => setShowRealPhoto(!showRealPhoto)}
+                    className="absolute top-4 right-4 p-2 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 transition-colors"
+                    aria-label={showRealPhoto ? "Ver memoji" : "Ver foto real"}
+                  >
+                    {showRealPhoto ? (
+                      <User className="w-5 h-5 text-primary" />
+                    ) : (
+                      <Eye className="w-5 h-5 text-primary" />
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Content */}
-          <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
+          <ScrollReveal variant="fade-left" className="order-1 lg:order-2">
+          <div className="space-y-4 md:space-y-6">
             <span className="section-title">Sobre mim</span>
             
             <h2 className="heading-md">
@@ -132,6 +136,7 @@ const AboutSection = () => {
               </Button>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ScrollReveal from "./ScrollReveal";
 
 const skills = {
   languages: [
@@ -103,61 +104,75 @@ const SkillsSection = () => {
   return (
     <section id="skills" className="py-24">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="section-title">Habilidades</span>
-          <h2 className="heading-md">
-            Tecnologias & <span className="text-gradient">Ferramentas</span>
-          </h2>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <span className="section-title">Habilidades</span>
+            <h2 className="heading-md">
+              Tecnologias & <span className="text-gradient">Ferramentas</span>
+            </h2>
+          </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Languages */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Linguagens</h3>
-            <div className="space-y-3">
-              {renderSkills(skills.languages, 'languages')}
+          <ScrollReveal delay={0}>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-center mb-6">Linguagens</h3>
+              <div className="space-y-3">
+                {renderSkills(skills.languages, 'languages')}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Frontend */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Frontend</h3>
-            <div className="space-y-3">
-              {renderSkills(skills.frontend, 'frontend')}
+          <ScrollReveal delay={100}>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-center mb-6">Frontend</h3>
+              <div className="space-y-3">
+                {renderSkills(skills.frontend, 'frontend')}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Backend */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Backend</h3>
-            <div className="space-y-3">
-              {renderSkills(skills.backend, 'backend')}
+          <ScrollReveal delay={200}>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-center mb-6">Backend</h3>
+              <div className="space-y-3">
+                {renderSkills(skills.backend, 'backend')}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Data Science & ML */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Data Science & ML</h3>
-            <div className="space-y-3">
-              {renderSkills(skills.data, 'data')}
+          <ScrollReveal delay={100}>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-center mb-6">Data Science & ML</h3>
+              <div className="space-y-3">
+                {renderSkills(skills.data, 'data')}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Tools */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Ferramentas</h3>
-            <div className="space-y-3">
-              {renderSkills(skills.tools, 'tools')}
+          <ScrollReveal delay={200}>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-center mb-6">Ferramentas</h3>
+              <div className="space-y-3">
+                {renderSkills(skills.tools, 'tools')}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Databases */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-center mb-6">Bancos de Dados</h3>
-            <div className="space-y-3">
-              {renderSkills(skills.databases, 'databases')}
+          <ScrollReveal delay={300}>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-center mb-6">Bancos de Dados</h3>
+              <div className="space-y-3">
+                {renderSkills(skills.databases, 'databases')}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

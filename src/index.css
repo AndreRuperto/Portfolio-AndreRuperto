@@ -245,6 +245,47 @@
   opacity: 0;
 }
 
+/* Scroll Reveal Animations */
+.scroll-reveal {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.fade-up {
+  transform: translateY(40px);
+}
+
+.scroll-reveal.fade-down {
+  transform: translateY(-40px);
+}
+
+.scroll-reveal.fade-left {
+  transform: translateX(-40px);
+}
+
+.scroll-reveal.fade-right {
+  transform: translateX(40px);
+}
+
+.scroll-reveal.scale {
+  transform: scale(0.92);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Respeitar preferência de menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* Mobile responsiveness utilities */
 @media (max-width: 640px) {
   .heading-lg {
