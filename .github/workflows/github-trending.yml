@@ -1,0 +1,53 @@
+name: GitHub Trending Email
+
+on:
+  schedule:
+    # Diário às 18h BRT (21:00 UTC)
+    - cron: "0 21 * * *"
+    # Semanal às 18h BRT de sexta-feira (21:00 UTC)
+    - cron: "0 21 * * 5"
+  workflow_dispatch:
+    inputs:
+      period:
+        description: "Period: daily or weekly"
+        required: false
+        default: "daily"
+        type: choice
+        options:
+          - daily
+          - weekly
+
+jobs:
+  send-daily:
+    if: github.event.schedule == '0 21 * * *' || (github.event_name == 'workflow_dispatch' && github.event.inputs.period == 'daily')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install resend cheerio
+        working-directory: scripts
+      - name: Send daily trending email
+        run: node github-trending-email.mjs daily
+        working-directory: scripts
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+  send-weekly:
+    if: github.event.schedule == '0 21 * * 5' || (github.event_name == 'workflow_dispatch' && github.event.inputs.period == 'weekly')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install resend cheerio
+        working-directory: scripts
+      - name: Send weekly trending email
+        run: node github-trending-email.mjs weekly
+        working-directory: scripts
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
