@@ -102,11 +102,11 @@ const WhySiteSection = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto items-stretch">
           {benefits.map((benefit, index) => (
-            <ScrollReveal key={index} delay={index * 100}>
+            <ScrollReveal key={index} delay={index * 100} className="h-full">
               <div
-                className="group bg-card rounded-2xl border border-border p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+                className="group h-full bg-card rounded-2xl border border-border p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">

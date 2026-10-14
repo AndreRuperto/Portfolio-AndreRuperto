@@ -96,15 +96,17 @@ const AboutSection = () => {
               </p>
               
               <p>
-                Atualmente, atuo como <strong className="text-foreground">Analista de Dados Júnior</strong> na 
-                <strong className="text-foreground"> Resende Mori Hutchison</strong>, onde desenvolvo soluções de análise 
-                de dados, automação de processos e criação de dashboards para suporte à tomada de decisões estratégicas.
+                Com experiência como <strong className="text-foreground">Analista de Dados Júnior</strong> e
+                <strong className="text-foreground"> Desenvolvedor</strong> na
+                <strong className="text-foreground"> Resende Mori Hutchison</strong>, onde desenvolvi soluções de análise
+                de dados, automação de processos e criação de dashboards — além de ter sido o responsável pelo
+                <strong className="text-foreground"> desenvolvimento completo do sistema interno</strong> do escritório,
+                do backend ao frontend.
               </p>
 
               <p>
-                Nos últimos 6 meses, <strong className="text-foreground">desenvolvi um sistema interno completo</strong> para 
-                o escritório, o que despertou ainda mais minha paixão pela área de desenvolvimento. Essa experiência me motivou 
-                a expandir minha atuação como <strong className="text-foreground">desenvolvedor freelancer</strong>, criando 
+                Essa experiência como desenvolvedor despertou ainda mais minha paixão pela área e me motivou
+                a expandir minha atuação como <strong className="text-foreground">desenvolvedor freelancer</strong>, criando
                 soluções personalizadas para diferentes necessidades.
               </p>
 

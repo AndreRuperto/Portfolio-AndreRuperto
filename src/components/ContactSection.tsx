@@ -182,8 +182,27 @@ const ContactSection = () => {
               )}
             </form>
 
+          </div>
+          </ScrollReveal>
+
+          {/* Image + direct contact */}
+          <ScrollReveal variant="fade-left" delay={300}>
+          <div className="flex flex-col items-center lg:items-end gap-4">
+            <div className="relative flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
+                <div className="relative bg-card rounded-3xl p-8 border border-border">
+                  <img
+                    src={memojiThinking}
+                    alt="Contato"
+                    className="w-64 h-64 md:w-80 md:h-80 object-contain mx-auto animate-float"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Direct contact */}
-            <div className="p-6 rounded-xl bg-secondary border border-border">
+            <div className="w-full p-6 rounded-xl bg-secondary border border-border">
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary" />
                 <div>
@@ -195,22 +214,6 @@ const ContactSection = () => {
                     contato@andreruperto.dev
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-          </ScrollReveal>
-
-          {/* Image */}
-          <ScrollReveal variant="fade-left" delay={300}>
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
-              <div className="relative bg-card rounded-3xl p-8 border border-border">
-                <img
-                  src={memojiThinking}
-                  alt="Contato"
-                  className="w-64 h-64 md:w-80 md:h-80 object-contain mx-auto animate-float"
-                />
               </div>
             </div>
           </div>
