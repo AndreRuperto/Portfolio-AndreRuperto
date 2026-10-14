@@ -105,7 +105,7 @@ const HeroSection = () => {
               </div>
               <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
                 <Button variant="heroOutline" size="lg" className="flex-1 sm:flex-none" asChild>
-                  <a href="https://drive.google.com/uc?export=download&id=1xpgYelvpG66mXmI7kdhxr_4kGh00t6VQ" download>
+                  <a href="https://drive.google.com/uc?export=download&id=1nyU8pIJYEYEi04gMoPSr9gmjX8L4yl7L" download>
                     <Download className="w-4 h-4" />
                     Download Currículo
                   </a>
