@@ -245,9 +245,9 @@ function buildConfirmationEmail({ name, subject, message }) {
 
 // Auth Routes
 app.post('/api/auth/login', loginLimiter, (req, res) => {
-  const { password } = req.body;
+  const { username, password } = req.body;
 
-  if (password === process.env.ADMIN_PASSWORD) {
+  if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASSWORD) {
     const token = jwt.sign(
       { id: 'admin' },
       process.env.JWT_SECRET,
@@ -256,7 +256,7 @@ app.post('/api/auth/login', loginLimiter, (req, res) => {
 
     res.json({ token, success: true });
   } else {
-    res.status(401).json({ error: 'Senha incorreta' });
+    res.status(401).json({ error: 'Usuário ou senha incorretos' });
   }
 });
 
@@ -388,13 +388,14 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
   }
 });
 
-// Serve static files from React build
-app.use(express.static(path.join(__dirname, '../dist')));
+// Serve static files from React build (only in production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
 
-// Handle React routing - CORRETO para Express 4
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+}
 
 const PORT = process.env.PORT || 3001;
 const ENV = process.env.NODE_ENV || 'development';

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Lock, LogIn, Eye, EyeOff } from "lucide-react";
 
 const AdminLogin = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -21,15 +22,15 @@ const AdminLogin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("admin_token", data.token);
-        navigate("/admin/email-preview");
+        navigate("/admin/projects");
       } else {
-        setError("Senha incorreta");
+        setError("Usuário ou senha incorretos");
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -50,12 +51,26 @@ const AdminLogin = () => {
             </div>
             <h1 className="text-2xl font-bold">Admin Login</h1>
             <p className="text-muted-foreground mt-2">
-              Acesso restrito ao preview de emails
+              Acesso restrito ao painel de administração
             </p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium mb-2">Usuário</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="w-full px-4 py-3 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none transition-colors"
+                placeholder="Digite o usuário"
+                autoFocus
+              />
+            </div>
+
             <div>
               <label htmlFor="password" className="block text-sm font-medium mb-2">
                 Senha
@@ -69,7 +84,6 @@ const AdminLogin = () => {
                   required
                   className="w-full px-4 py-3 pr-12 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none transition-colors"
                   placeholder="Digite a senha de admin"
-                  autoFocus
                 />
                 <button
                   type="button"
