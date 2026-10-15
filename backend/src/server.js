@@ -308,6 +308,24 @@ app.post('/api/projects', authMiddleware, async (req, res) => {
   }
 });
 
+app.put('/api/projects/reorder', authMiddleware, async (req, res) => {
+  try {
+    const { items } = req.body; // [{ id, order }]
+    if (!Array.isArray(items)) {
+      return res.status(400).json({ error: 'items deve ser um array' });
+    }
+    await Promise.all(
+      items.map(({ id, order }) =>
+        prisma.project.update({ where: { id }, data: { order } })
+      )
+    );
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Erro ao reordenar:', error);
+    res.status(500).json({ error: 'Erro ao reordenar projetos' });
+  }
+});
+
 app.put('/api/projects/:id', authMiddleware, async (req, res) => {
   try {
     const project = await prisma.project.update({
@@ -330,6 +348,38 @@ app.delete('/api/projects/:id', authMiddleware, async (req, res) => {
   } catch (error) {
     console.error('Erro ao deletar projeto:', error);
     res.status(500).json({ error: 'Erro ao deletar projeto' });
+  }
+});
+
+app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
+  const { url } = req.body;
+  if (!url) return res.status(400).json({ error: 'URL é obrigatória' });
+
+  const id = parseInt(req.params.id);
+  const fileName = `site-project-${id}.png`;
+  const outputPath = path.join(__dirname, '../../public', fileName);
+
+  try {
+    const { default: puppeteer } = await import('puppeteer');
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 720 });
+    await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
+    await new Promise(r => setTimeout(r, 3000));
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: outputPath, fullPage: false });
+    await browser.close();
+
+    const imagePath = `/${fileName}`;
+    await prisma.project.update({ where: { id }, data: { image: imagePath } });
+
+    res.json({ success: true, image: imagePath });
+  } catch (error) {
+    console.error('Erro ao capturar screenshot:', error);
+    res.status(500).json({ error: 'Erro ao capturar screenshot' });
   }
 });
 
