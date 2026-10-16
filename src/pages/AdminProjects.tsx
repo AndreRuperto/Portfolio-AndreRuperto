@@ -127,8 +127,14 @@ const AdminProjects = () => {
     const url = isEdit ? `${API_URL}/projects/${modal.project!.id}` : `${API_URL}/projects`;
     const method = isEdit ? "PUT" : "POST";
 
+    const links = [...projectData.links.filter(l => l.url && l.label)];
+    if (siteUrl && !links.some(l => l.url === siteUrl)) {
+      links.unshift({ url: siteUrl, label: "Ver site" });
+    }
+
     const body = {
       ...projectData,
+      links,
       github: projectData.github || null,
       order: isEdit ? modal.project!.order : projects.length + 1,
     };
