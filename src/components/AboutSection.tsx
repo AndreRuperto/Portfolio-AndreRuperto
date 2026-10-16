@@ -90,29 +90,28 @@ const AboutSection = () => {
 
             <div className="space-y-4 text-muted-foreground text-justify">
               <p>
-                Sou o André, formado em <strong className="text-foreground">Ciência da Computação</strong> pelo 
-                Centro Universitário UDF, com foco em <strong className="text-foreground">Ciência de Dados</strong> e 
+                Sou o André, formado em <strong className="text-foreground">Ciência da Computação</strong> pelo
+                Centro Universitário UDF, com foco em <strong className="text-foreground">Ciência de Dados</strong> e
                 <strong className="text-foreground"> Automatização de Processos</strong>.
               </p>
-              
+
               <p>
-                Com experiência como <strong className="text-foreground">Analista de Dados Júnior</strong> e
+                Atuei como <strong className="text-foreground">Analista de Dados Júnior</strong> e
                 <strong className="text-foreground"> Desenvolvedor</strong> na
-                <strong className="text-foreground"> Resende Mori Hutchison</strong>, onde desenvolvi soluções de análise
-                de dados, automação de processos e criação de dashboards — além de ter sido o responsável pelo
-                <strong className="text-foreground"> desenvolvimento completo do sistema interno</strong> do escritório,
-                do backend ao frontend.
+                <strong className="text-foreground"> Resende Mori Hutchison</strong>, trabalhando com análise de dados,
+                automação de processos e dashboards. Também fui responsável pelo desenvolvimento completo do
+                <strong className="text-foreground"> sistema interno</strong> do escritório, do backend ao frontend.
               </p>
 
               <p>
-                Essa experiência como desenvolvedor despertou ainda mais minha paixão pela área e me motivou
-                a expandir minha atuação como <strong className="text-foreground">desenvolvedor freelancer</strong>, criando
-                soluções personalizadas para diferentes necessidades.
+                Essa experiência me fez querer ir além da análise — hoje atuo também como
+                <strong className="text-foreground"> desenvolvedor freelancer</strong>, criando projetos sob medida
+                para clientes de diferentes áreas.
               </p>
 
               <p>
-                Apaixonado por 
-                transformar dados em decisões inteligentes através de Machine Learning e análise de dados.
+                Gosto de resolver problemas com dados, seja com <strong className="text-foreground">Machine Learning</strong>,
+                automação ou uma boa análise — e de construir as ferramentas que tornam isso possível.
               </p>
             </div>
 
