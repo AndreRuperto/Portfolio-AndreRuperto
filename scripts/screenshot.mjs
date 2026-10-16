@@ -9,6 +9,7 @@ const screenshotsDir = path.resolve(__dirname, "../src/assets/screenshots");
 const sites = [
   { url: "https://bluemais.up.railway.app/", name: "site-bluemais.png" },
   { url: "https://advocaciaruperto.up.railway.app/", name: "site-advocaciaruperto.png" },
+  { url: "https://mangueiraepeixoto.com.br/", name: "site-mangueiraepeixoto.png" },
 ];
 
 async function slowScroll(page) {

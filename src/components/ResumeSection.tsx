@@ -171,9 +171,9 @@ const ResumeSection = () => {
 
   const experience = [
     {
-      period: "Mai/2025 - Out/2025",
+      period: "Mai/2025 - Out/2026",
       startDate: "2025-05-12",
-      endDate: "2025-10-09",
+      endDate: "2026-10-09",
       title: "Desenvolvedor FullStack Júnior",
       company: "Resende Mori Hutchison",
       bullets: [
@@ -186,9 +186,9 @@ const ResumeSection = () => {
       ],
     },
     {
-      period: "Mai/2025 - Out/2025",
+      period: "Mai/2025 - Ago/2025",
       startDate: "2025-05-12",
-      endDate: "2025-10-09",
+      endDate: "2025-08-31",
       title: "Analista de Dados Júnior",
       company: "Resende Mori Hutchison",
       bullets: [

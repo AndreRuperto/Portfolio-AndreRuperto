@@ -14,15 +14,6 @@ const projects = [
     order: 1
   },
   {
-    title: "Ruperto & Ruperto - Advocacia",
-    description: "Website institucional moderno para escritório de advocacia, com design profissional, seções de experiência e expertise, desenvolvido com React e Tailwind CSS.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    image: "/assets/site-advocaciaruperto.png",
-    links: [{ url: "https://advocaciaruperto.up.railway.app", label: "Ver site" }],
-    github: null,
-    order: 2
-  },
-  {
     title: "Modelo de Credenciamento - PNCP",
     description: "Modelo de Machine Learning para automatizar análise de credenciamento no PNCP. Redução de 93,5% no volume de análises manuais (de 1494 para 97 pedidos), com acurácia de 94,65% e F1-score de 0.97 para rejeições.",
     tags: ["Python", "ML", "Random Forest", "XGBoost"],
