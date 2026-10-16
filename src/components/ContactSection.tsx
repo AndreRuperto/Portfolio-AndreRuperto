@@ -202,7 +202,7 @@ const ContactSection = () => {
             </div>
 
             {/* Direct contact */}
-            <div className="w-full p-6 rounded-xl bg-secondary border border-border">
+            <div className="w-full p-6 rounded-xl bg-secondary border border-border flex justify-center">
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary" />
                 <div>
