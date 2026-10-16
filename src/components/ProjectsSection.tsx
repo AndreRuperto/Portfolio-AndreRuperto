@@ -200,7 +200,11 @@ const ProjectsSection = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+        <div className={`grid gap-8 mx-auto items-stretch ${
+          projects.filter(p => p.image).length % 2 !== 0
+            ? "md:grid-cols-3 max-w-7xl"
+            : "md:grid-cols-2 max-w-5xl"
+        }`}>
           {projects.map((project, index) => (
             <ScrollReveal key={project.id} delay={index * 150} className="h-full">
             <div
