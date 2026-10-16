@@ -369,6 +369,7 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
+    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
     await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
     await new Promise(r => setTimeout(r, 3000));
     await page.evaluate(() => window.scrollTo(0, 0));
