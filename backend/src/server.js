@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { mkdirSync } from 'fs';
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
@@ -358,10 +359,7 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
 
   const id = parseInt(req.params.id);
   const fileName = `site-project-${id}.png`;
-  const staticDir = process.env.NODE_ENV === 'production'
-    ? path.join(__dirname, '../dist')
-    : path.join(__dirname, '../../public');
-  const outputPath = path.join(staticDir, fileName);
+  const outputPath = path.join(uploadsDir, fileName);
 
   try {
     const { default: puppeteer } = await import('puppeteer');
@@ -377,7 +375,7 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
     await page.screenshot({ path: outputPath, fullPage: false });
     await browser.close();
 
-    const imagePath = `/${fileName}`;
+    const imagePath = `/uploads/${fileName}`;
     await prisma.project.update({ where: { id }, data: { image: imagePath } });
 
     res.json({ success: true, image: imagePath });
@@ -441,6 +439,13 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
     res.status(500).json({ error: 'Erro ao enviar mensagem' });
   }
 });
+
+// Serve uploaded screenshots (persisted volume)
+const uploadsDir = process.env.NODE_ENV === 'production'
+  ? '/app/uploads'
+  : path.join(__dirname, '../../public/uploads');
+mkdirSync(uploadsDir, { recursive: true });
+app.use('/uploads', express.static(uploadsDir));
 
 // Serve static files from React build (only in production)
 if (process.env.NODE_ENV === 'production') {
