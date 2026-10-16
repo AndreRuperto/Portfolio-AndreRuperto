@@ -358,7 +358,10 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
 
   const id = parseInt(req.params.id);
   const fileName = `site-project-${id}.png`;
-  const outputPath = path.join(__dirname, '../../public', fileName);
+  const staticDir = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, '../dist')
+    : path.join(__dirname, '../../public');
+  const outputPath = path.join(staticDir, fileName);
 
   try {
     const { default: puppeteer } = await import('puppeteer');
