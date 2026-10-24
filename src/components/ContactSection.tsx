@@ -77,7 +77,7 @@ const ContactSection = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
           {/* Form */}
           <ScrollReveal variant="fade-right" delay={100}>
           <div className="space-y-6">
