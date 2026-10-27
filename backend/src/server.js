@@ -371,8 +371,19 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
     await page.setViewport({ width: 1280, height: 720 });
     await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
     await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
-    await new Promise(r => setTimeout(r, 3000));
-    await page.evaluate(() => window.scrollTo(0, 0));
+    // Scroll até o final para forçar lazy loading de todos os elementos
+    await page.evaluate(async () => {
+      const delay = ms => new Promise(r => setTimeout(r, ms));
+      const height = () => document.body.scrollHeight;
+      let prev = 0;
+      while (prev !== height()) {
+        prev = height();
+        window.scrollTo(0, prev);
+        await delay(1000);
+      }
+      window.scrollTo(0, 0);
+    });
+    await new Promise(r => setTimeout(r, 2000));
     await page.screenshot({ path: outputPath, fullPage: true });
     await browser.close();
 
