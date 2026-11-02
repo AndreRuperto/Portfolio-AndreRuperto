@@ -353,49 +353,148 @@ app.delete('/api/projects/:id', authMiddleware, async (req, res) => {
   }
 });
 
+
 app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
   const { url } = req.body;
-  if (!url) return res.status(400).json({ error: 'URL é obrigatória' });
 
-  const id = parseInt(req.params.id);
+  if (!url) {
+    return res.status(400).json({ error: 'URL é obrigatória' });
+  }
+
+  const id = parseInt(req.params.id, 10);
+
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'ID do projeto inválido' });
+  }
+
   const fileName = `site-project-${id}.png`;
   const outputPath = path.join(uploadsDir, fileName);
 
+  let browser;
+
   try {
     const { default: puppeteer } = await import('puppeteer');
-    const browser = await puppeteer.launch({
+
+    browser = await puppeteer.launch({
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+      ],
     });
+
     const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 720 });
-    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
-    await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 });
-    // Scroll até o final para forçar lazy loading de todos os elementos
+
+    await page.setViewport({
+      width: 1280,
+      height: 720,
+      deviceScaleFactor: 1,
+    });
+
+    await page.emulateMediaFeatures([
+      { name: 'prefers-color-scheme', value: 'dark' },
+    ]);
+
+    // 1. Carrega a página
+    await page.goto(url, {
+      waitUntil: 'networkidle0',
+      timeout: 60000,
+    });
+
+    // 2. Aguarda o carregamento das fontes
     await page.evaluate(async () => {
-      const delay = ms => new Promise(r => setTimeout(r, ms));
-      const height = () => document.body.scrollHeight;
-      let prev = 0;
-      while (prev !== height()) {
-        prev = height();
-        window.scrollTo(0, prev);
-        await delay(1000);
+      await document.fonts.ready;
+    });
+
+    // 3. Percorre a página para ativar lazy loading
+    await page.evaluate(async () => {
+      const delay = ms =>
+        new Promise(resolve => setTimeout(resolve, ms));
+
+      const step = window.innerHeight;
+      let previousHeight = 0;
+      let currentHeight = document.body.scrollHeight;
+
+      while (previousHeight !== currentHeight) {
+        previousHeight = currentHeight;
+
+        for (
+          let position = 0;
+          position < currentHeight;
+          position += step
+        ) {
+          window.scrollTo(0, position);
+          await delay(500);
+        }
+
+        currentHeight = document.body.scrollHeight;
       }
+
       window.scrollTo(0, 0);
     });
-    await new Promise(r => setTimeout(r, 2000));
-    await page.screenshot({ path: outputPath, fullPage: true });
-    await browser.close();
 
+    // 4. Aguarda o carregamento das imagens
+    await page.evaluate(async () => {
+      const images = Array.from(document.images);
+
+      await Promise.all(
+        images.map(img => {
+          if (img.complete) {
+            return Promise.resolve();
+          }
+
+          return new Promise(resolve => {
+            img.addEventListener('load', resolve, { once: true });
+            img.addEventListener('error', resolve, { once: true });
+          });
+        })
+      );
+    });
+
+    // 5. Aguarda a estabilização visual dos gráficos
+    await page.waitForTimeout(10000);
+
+    // 6. Retorna ao topo
+    await page.evaluate(() => {
+      window.scrollTo(0, 0);
+    });
+
+    await page.waitForTimeout(1000);
+
+    // 7. Captura o screenshot
+    await page.screenshot({
+      path: outputPath,
+      fullPage: true,
+      type: 'png',
+    });
+
+    // 8. Atualiza a imagem no banco
     const imagePath = `/uploads/${fileName}`;
-    await prisma.project.update({ where: { id }, data: { image: imagePath } });
 
-    res.json({ success: true, image: imagePath });
+    await prisma.project.update({
+      where: { id },
+      data: { image: imagePath },
+    });
+
+    res.json({
+      success: true,
+      image: imagePath,
+    });
+
   } catch (error) {
     console.error('Erro ao capturar screenshot:', error);
-    res.status(500).json({ error: 'Erro ao capturar screenshot' });
+
+    res.status(500).json({
+      error: 'Erro ao capturar screenshot',
+    });
+
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
   }
 });
+
 
 // Contact form endpoint
 app.post('/api/contact', contactLimiter, async (req, res) => {
