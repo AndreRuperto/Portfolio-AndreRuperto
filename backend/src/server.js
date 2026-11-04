@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync } from 'fs';
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
@@ -18,6 +18,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+// WebP quality for project screenshots, and the tallest image the browser can capture in one go.
+const SCREENSHOT_QUALITY = 78;
+const MAX_SCREENSHOT_HEIGHT = 16000;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -367,7 +372,7 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
     return res.status(400).json({ error: 'ID do projeto inválido' });
   }
 
-  const fileName = `site-project-${id}.png`;
+  const fileName = `site-project-${id}.webp`;
   const outputPath = path.join(uploadsDir, fileName);
 
   let browser;
@@ -452,20 +457,22 @@ app.post('/api/projects/:id/screenshot', authMiddleware, async (req, res) => {
     });
 
     // 5. Aguarda a estabilização visual dos gráficos
-    await page.waitForTimeout(10000);
+    // (page.waitForTimeout não existe mais no Puppeteer 22+)
+    await sleep(10000);
 
     // 6. Retorna ao topo
     await page.evaluate(() => {
       window.scrollTo(0, 0);
     });
 
-    await page.waitForTimeout(1000);
+    await sleep(1000);
 
-    // 7. Captura o screenshot
+    // 7. Captura o screenshot em WebP: a página inteira em PNG chegava a vários MB
     await page.screenshot({
       path: outputPath,
       fullPage: true,
-      type: 'png',
+      type: 'webp',
+      quality: SCREENSHOT_QUALITY,
     });
 
     // 8. Atualiza a imagem no banco
@@ -567,6 +574,56 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// Project images saved as PNG (old full-page screenshots, files in /public) weigh several MB each.
+// Once, after the server starts, each is re-encoded as WebP in the uploads volume and the project
+// is pointed to it. Projects already on WebP are skipped, so later restarts do nothing.
+async function convertProjectImagesToWebp() {
+  const projects = await prisma.project.findMany({ where: { image: { endsWith: '.png' } } });
+  if (projects.length === 0) return;
+
+  const publicDir = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, '../dist')
+    : path.join(__dirname, '../../public');
+  const { default: puppeteer } = await import('puppeteer');
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+
+  try {
+    for (const project of projects) {
+      const source = project.image.startsWith('/uploads/')
+        ? path.join(uploadsDir, path.basename(project.image))
+        : path.join(publicDir, project.image);
+      if (!existsSync(source)) {
+        console.warn(`Imagem não encontrada para o projeto ${project.id}: ${project.image}`);
+        continue;
+      }
+
+      const fileName = path.basename(project.image, '.png') + '.webp';
+      const page = await browser.newPage();
+      try {
+        // The browser decodes the PNG and screenshots it as WebP at its own size.
+        const dataUrl = `data:image/png;base64,${readFileSync(source).toString('base64')}`;
+        await page.setContent(`<body style="margin:0"><img id="i" src="${dataUrl}"></body>`, { waitUntil: 'load' });
+        const { width, height } = await page.$eval('#i', (img) => ({ width: img.naturalWidth, height: img.naturalHeight }));
+        await page.setViewport({ width, height: Math.min(height, MAX_SCREENSHOT_HEIGHT) });
+        await page.screenshot({
+          path: path.join(uploadsDir, fileName),
+          type: 'webp',
+          quality: SCREENSHOT_QUALITY,
+          clip: { x: 0, y: 0, width, height: Math.min(height, MAX_SCREENSHOT_HEIGHT) },
+          captureBeyondViewport: true,
+        });
+      } finally {
+        await page.close();
+      }
+
+      await prisma.project.update({ where: { id: project.id }, data: { image: `/uploads/${fileName}` } });
+      console.log(`✓ Imagem do projeto ${project.id} convertida para WebP (${fileName})`);
+    }
+  } finally {
+    await browser.close();
+  }
+}
+
 const PORT = process.env.PORT || 3001;
 const ENV = process.env.NODE_ENV || 'development';
 
@@ -574,4 +631,5 @@ app.listen(PORT, () => {
   console.log(`\n✓ Server running on port ${PORT} (${ENV})`);
   console.log(`✓ API: http://localhost:${PORT}/api`);
   console.log(`✓ Frontend: http://localhost:${PORT}\n`);
+  convertProjectImagesToWebp().catch((error) => console.error('Erro ao converter imagens para WebP:', error));
 });

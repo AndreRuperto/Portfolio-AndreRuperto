@@ -218,6 +218,8 @@ const ProjectsSection = () => {
                     <img
                       src={project.image}
                       alt={`Screenshot de ${project.title}`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-60 object-cover object-top"
                     />
                     <button

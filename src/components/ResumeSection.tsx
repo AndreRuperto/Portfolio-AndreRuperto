@@ -171,8 +171,8 @@ const ResumeSection = () => {
 
   const experience = [
     {
-      period: "Mai/2025 - Out/2026",
-      startDate: "2025-05-12",
+      period: "Ago/2025 - Out/2026",
+      startDate: "2025-08-01",
       endDate: "2026-10-09",
       title: "Desenvolvedor FullStack Júnior",
       company: "Resende Mori Hutchison",

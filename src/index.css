@@ -245,6 +245,13 @@
   opacity: 0;
 }
 
+/* Elements waiting to slide in (fade-right/left) start off-screen; clip them so the page
+   never scrolls sideways on phones. "clip" keeps position: sticky working, unlike "hidden". */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Scroll Reveal Animations */
 .scroll-reveal {
   opacity: 0;
