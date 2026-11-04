@@ -17,6 +17,10 @@ model Project {
   links       Json     // JSON nativo
   github      String?
   order       Int      @default(0)
+  testimonialAuthor String? // depoimento do cliente (opcional)
+  testimonialRole   String?
+  testimonialText   String?
+  testimonialRating Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

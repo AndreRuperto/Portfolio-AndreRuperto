@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Plus, Trash2 } from "lucide-react";
+import { X, Plus, Trash2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ProjectLink { url: string; label: string; }
@@ -10,6 +10,10 @@ interface ProjectFormData {
   links: ProjectLink[];
   github: string;
   siteUrl: string;
+  testimonialAuthor: string;
+  testimonialRole: string;
+  testimonialText: string;
+  testimonialRating: number | null;
 }
 
 interface Props {
@@ -20,6 +24,7 @@ interface Props {
 
 const EMPTY: ProjectFormData = {
   title: "", description: "", tags: [], links: [], github: "", siteUrl: "",
+  testimonialAuthor: "", testimonialRole: "", testimonialText: "", testimonialRating: null,
 };
 
 const ProjectFormModal = ({ initial, onSave, onClose }: Props) => {
@@ -132,6 +137,31 @@ const ProjectFormModal = ({ initial, onSave, onClose }: Props) => {
             <input value={form.github} onChange={e => setForm(f => ({ ...f, github: e.target.value }))}
               placeholder="https://github.com/..."
               className="w-full px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none" />
+          </div>
+
+          {/* Testimonial */}
+          <div className="pt-4 border-t border-border space-y-3">
+            <label className="block text-sm font-medium">Depoimento do cliente <span className="text-muted-foreground text-xs">(opcional)</span></label>
+            <textarea value={form.testimonialText} onChange={e => setForm(f => ({ ...f, testimonialText: e.target.value }))}
+              rows={3} placeholder="O que o cliente disse sobre o trabalho"
+              className="w-full px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none resize-none text-sm" />
+            <div className="flex gap-2">
+              <input value={form.testimonialAuthor} onChange={e => setForm(f => ({ ...f, testimonialAuthor: e.target.value }))}
+                placeholder="Nome do cliente"
+                className="flex-1 px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none text-sm" />
+              <input value={form.testimonialRole} onChange={e => setForm(f => ({ ...f, testimonialRole: e.target.value }))}
+                placeholder="Cargo / empresa"
+                className="flex-1 px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none text-sm" />
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="text-sm text-muted-foreground mr-2">Nota</span>
+              {[1, 2, 3, 4, 5].map(n => (
+                <button key={n} type="button" aria-label={`${n} estrelas`}
+                  onClick={() => setForm(f => ({ ...f, testimonialRating: f.testimonialRating === n ? null : n }))}>
+                  <Star className={`w-5 h-5 ${form.testimonialRating && n <= form.testimonialRating ? "fill-primary text-primary" : "text-muted-foreground"}`} />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 

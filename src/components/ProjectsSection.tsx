@@ -1,5 +1,5 @@
 // src/components/ProjectsSection.tsx
-import { ExternalLink, Github, Eye, X, ChevronsDown, ChevronDown } from "lucide-react";
+import { ExternalLink, Github, Eye, X, ChevronsDown, ChevronDown, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import memojiFist from "@/assets/images/memoji-fist.png";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -19,6 +19,9 @@ interface Project {
   links: ProjectLink[];
   github: string | null;
   order: number;
+  testimonialAuthor: string | null;
+  testimonialRole: string | null;
+  testimonialText: string | null;
 }
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -234,6 +237,19 @@ const ProjectsSection = () => {
 
                 <h3 className="text-xl font-bold mb-3">{project.title}</h3>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
+
+                {project.testimonialText && (
+                  <figure className="mb-4 p-4 rounded-xl bg-secondary/60 border border-border">
+                    <Quote className="w-4 h-4 text-primary mb-2" />
+                    <blockquote className="text-sm italic text-foreground/90">"{project.testimonialText}"</blockquote>
+                    {project.testimonialAuthor && (
+                      <figcaption className="mt-2 text-xs text-muted-foreground">
+                        — <span className="text-foreground font-medium">{project.testimonialAuthor}</span>
+                        {project.testimonialRole && `, ${project.testimonialRole}`}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, j) => (

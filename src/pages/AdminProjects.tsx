@@ -18,11 +18,15 @@ interface ProjectLink { url: string; label: string; }
 interface Project {
   id: number; title: string; description: string; tags: string[];
   image: string | null; links: ProjectLink[]; github: string | null; order: number;
+  testimonialAuthor: string | null; testimonialRole: string | null;
+  testimonialText: string | null; testimonialRating: number | null;
 }
 
 interface ProjectFormData {
   title: string; description: string; tags: string[];
   links: ProjectLink[]; github: string; siteUrl: string;
+  testimonialAuthor: string; testimonialRole: string;
+  testimonialText: string; testimonialRating: number | null;
 }
 
 function SortableProjectRow({
@@ -136,6 +140,10 @@ const AdminProjects = () => {
       ...projectData,
       links,
       github: projectData.github || null,
+      testimonialAuthor: projectData.testimonialAuthor.trim() || null,
+      testimonialRole: projectData.testimonialRole.trim() || null,
+      testimonialText: projectData.testimonialText.trim() || null,
+      testimonialRating: projectData.testimonialRating,
       order: isEdit ? modal.project!.order : projects.length + 1,
     };
 
@@ -239,6 +247,10 @@ const AdminProjects = () => {
             links: modal.project.links,
             github: modal.project.github ?? "",
             siteUrl: "",
+            testimonialAuthor: modal.project.testimonialAuthor ?? "",
+            testimonialRole: modal.project.testimonialRole ?? "",
+            testimonialText: modal.project.testimonialText ?? "",
+            testimonialRating: modal.project.testimonialRating,
           } : undefined}
           onSave={handleSave}
           onClose={() => setModal({ open: false })}
