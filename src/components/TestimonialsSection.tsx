@@ -66,7 +66,7 @@ const TestimonialsSection = () => {
                   )}
                 </div>
 
-                <blockquote className="flex-1 text-foreground/90 leading-relaxed">
+                <blockquote className="flex-1 text-foreground/90 leading-relaxed whitespace-pre-line">
                   "{item.testimonialText}"
                 </blockquote>
 

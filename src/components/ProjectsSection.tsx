@@ -241,7 +241,8 @@ const ProjectsSection = () => {
                 {project.testimonialText && (
                   <figure className="mb-4 p-4 rounded-xl bg-secondary/60 border border-border">
                     <Quote className="w-4 h-4 text-primary mb-2" />
-                    <blockquote className="text-sm italic text-foreground/90">"{project.testimonialText}"</blockquote>
+                    <blockquote className="text-sm italic text-foreground/90 line-clamp-4">"{project.testimonialText}"</blockquote>
+                    <a href="#testimonials" className="mt-1 inline-block text-xs text-primary hover:underline">Ler depoimento completo</a>
                     {project.testimonialAuthor && (
                       <figcaption className="mt-2 text-xs text-muted-foreground">
                         — <span className="text-foreground font-medium">{project.testimonialAuthor}</span>
