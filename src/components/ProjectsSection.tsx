@@ -22,6 +22,7 @@ interface Project {
   testimonialAuthor: string | null;
   testimonialRole: string | null;
   testimonialText: string | null;
+  testimonialPhoto: string | null;
 }
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -244,9 +245,12 @@ const ProjectsSection = () => {
                     <blockquote className="text-sm italic text-foreground/90 line-clamp-4">"{project.testimonialText}"</blockquote>
                     <a href="#testimonials" className="mt-1 inline-block text-xs text-primary hover:underline">Ler depoimento completo</a>
                     {project.testimonialAuthor && (
-                      <figcaption className="mt-2 text-xs text-muted-foreground">
-                        — <span className="text-foreground font-medium">{project.testimonialAuthor}</span>
-                        {project.testimonialRole && `, ${project.testimonialRole}`}
+                      <figcaption className="mt-2 text-xs text-muted-foreground flex items-center gap-2">
+                        {project.testimonialPhoto && (
+                          <img src={project.testimonialPhoto} alt="" loading="lazy" className="w-6 h-6 rounded-full object-cover" />
+                        )}
+                        <span>— <span className="text-foreground font-medium">{project.testimonialAuthor}</span>
+                        {project.testimonialRole && `, ${project.testimonialRole}`}</span>
                       </figcaption>
                     )}
                   </figure>

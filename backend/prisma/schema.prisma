@@ -21,6 +21,7 @@ model Project {
   testimonialRole   String?
   testimonialText   String?
   testimonialRating Int?
+  testimonialPhoto  String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

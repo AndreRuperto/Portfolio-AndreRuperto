@@ -14,6 +14,7 @@ interface ProjectFormData {
   testimonialRole: string;
   testimonialText: string;
   testimonialRating: number | null;
+  testimonialPhoto: string;
 }
 
 interface Props {
@@ -25,6 +26,7 @@ interface Props {
 const EMPTY: ProjectFormData = {
   title: "", description: "", tags: [], links: [], github: "", siteUrl: "",
   testimonialAuthor: "", testimonialRole: "", testimonialText: "", testimonialRating: null,
+  testimonialPhoto: "",
 };
 
 const ProjectFormModal = ({ initial, onSave, onClose }: Props) => {
@@ -153,6 +155,9 @@ const ProjectFormModal = ({ initial, onSave, onClose }: Props) => {
                 placeholder="Cargo / empresa"
                 className="flex-1 px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none text-sm" />
             </div>
+            <input value={form.testimonialPhoto} onChange={e => setForm(f => ({ ...f, testimonialPhoto: e.target.value }))}
+              placeholder="Foto do cliente (ex: /testimonials/nome.webp)"
+              className="w-full px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none text-sm" />
             <div className="flex items-center gap-1">
               <span className="text-sm text-muted-foreground mr-2">Nota</span>
               {[1, 2, 3, 4, 5].map(n => (

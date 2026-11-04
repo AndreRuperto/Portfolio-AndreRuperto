@@ -20,6 +20,7 @@ interface Project {
   image: string | null; links: ProjectLink[]; github: string | null; order: number;
   testimonialAuthor: string | null; testimonialRole: string | null;
   testimonialText: string | null; testimonialRating: number | null;
+  testimonialPhoto: string | null;
 }
 
 interface ProjectFormData {
@@ -27,6 +28,7 @@ interface ProjectFormData {
   links: ProjectLink[]; github: string; siteUrl: string;
   testimonialAuthor: string; testimonialRole: string;
   testimonialText: string; testimonialRating: number | null;
+  testimonialPhoto: string;
 }
 
 function SortableProjectRow({
@@ -144,6 +146,7 @@ const AdminProjects = () => {
       testimonialRole: projectData.testimonialRole.trim() || null,
       testimonialText: projectData.testimonialText.trim() || null,
       testimonialRating: projectData.testimonialRating,
+      testimonialPhoto: projectData.testimonialPhoto.trim() || null,
       order: isEdit ? modal.project!.order : projects.length + 1,
     };
 
@@ -251,6 +254,7 @@ const AdminProjects = () => {
             testimonialRole: modal.project.testimonialRole ?? "",
             testimonialText: modal.project.testimonialText ?? "",
             testimonialRating: modal.project.testimonialRating,
+            testimonialPhoto: modal.project.testimonialPhoto ?? "",
           } : undefined}
           onSave={handleSave}
           onClose={() => setModal({ open: false })}
