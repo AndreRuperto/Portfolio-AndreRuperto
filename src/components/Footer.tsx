@@ -41,7 +41,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo / Nome */}
           <div className="flex flex-col items-center md:items-start gap-2">
-            <a href="#" className="text-xl font-bold">
+            <a href="#" className="text-2xl font-extrabold tracking-tighter">
               André<span className="text-primary">.</span>
             </a>
             <p className="text-sm text-muted-foreground">

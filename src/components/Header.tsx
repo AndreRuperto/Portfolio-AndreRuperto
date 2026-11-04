@@ -34,7 +34,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="text-xl font-bold text-gradient">
+          <a href="#" className="text-2xl font-extrabold tracking-tighter text-gradient">
             André<span className="text-foreground">.</span>
           </a>
 
