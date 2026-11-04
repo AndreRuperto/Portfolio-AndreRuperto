@@ -5,6 +5,7 @@ export interface Recommendation {
   relation: string;
   date: string;
   text: string;
+  photo?: string;
 }
 
 export const LINKEDIN_RECOMMENDATIONS_URL = "https://www.linkedin.com/in/andrerup/details/recommendations/";
@@ -12,6 +13,7 @@ export const LINKEDIN_RECOMMENDATIONS_URL = "https://www.linkedin.com/in/andreru
 export const recommendations: Recommendation[] = [
   {
     author: "Hugo Souto, MSc",
+    photo: "/testimonials/hugo.webp",
     headline: "AI Solutions Architect · Consultant & Advisor",
     relation: "Supervisionou André diretamente",
     date: "Out 2026",
@@ -19,6 +21,7 @@ export const recommendations: Recommendation[] = [
   },
   {
     author: "Júnior Melo",
+    photo: "/testimonials/junior.webp",
     headline: "Senior Python Engineer | Django, FastAPI, Integração de Dados, Automação, PostgreSQL, Docker e IA Agentic",
     relation: "Trabalhou na mesma equipe",
     date: "Fev 2026",
@@ -26,6 +29,7 @@ export const recommendations: Recommendation[] = [
   },
   {
     author: "Gabriel Borges",
+    photo: "/testimonials/gabriel.webp",
     headline: "Desenvolvedor Full Stack | Node.js, TypeScript, React e PostgreSQL | APIs, Integrações e Automação",
     relation: "Trabalhou na mesma equipe",
     date: "Out 2026",
@@ -33,6 +37,7 @@ export const recommendations: Recommendation[] = [
   },
   {
     author: "Caio Duarte",
+    photo: "/testimonials/caio.webp",
     headline: "Desenvolvedor Full-Stack | Engenharia de Software @UnB",
     relation: "Trabalhou na mesma equipe",
     date: "Out 2026",
@@ -40,6 +45,7 @@ export const recommendations: Recommendation[] = [
   },
   {
     author: "Walter Baldez",
+    photo: "/testimonials/walter.webp",
     headline: "Gestor de Recursos Humanos, cursando MBA em Gestão Financeira, Controladoria e Auditoria",
     relation: "Trabalhou com André em outra equipe",
     date: "Out 2026",

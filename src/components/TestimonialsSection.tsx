@@ -55,9 +55,18 @@ const RecommendationCard = ({ item }: { item: Recommendation }) => (
     <ExpandableText text={item.text} />
 
     <figcaption className="mt-6 pt-4 border-t border-border flex items-center gap-3">
-      <div className="w-12 h-12 rounded-full bg-secondary border-2 border-primary/40 flex items-center justify-center flex-shrink-0 font-bold text-primary">
-        {initials(item.author)}
-      </div>
+      {item.photo ? (
+        <img
+          src={item.photo}
+          alt={item.author}
+          loading="lazy"
+          className="w-12 h-12 rounded-full object-cover border-2 border-primary/40 flex-shrink-0"
+        />
+      ) : (
+        <div className="w-12 h-12 rounded-full bg-secondary border-2 border-primary/40 flex items-center justify-center flex-shrink-0 font-bold text-primary">
+          {initials(item.author)}
+        </div>
+      )}
       <div className="min-w-0">
         <p className="font-semibold text-foreground">{item.author}</p>
         <p className="text-sm text-muted-foreground line-clamp-1" title={item.headline}>{item.headline}</p>
