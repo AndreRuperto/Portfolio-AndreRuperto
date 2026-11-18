@@ -122,7 +122,7 @@ const ProjectFormModal = ({ initial, onSave, onClose }: Props) => {
                   <input value={link.url} onChange={e => updateLink(i, "url", e.target.value)}
                     placeholder="https://..."
                     className="flex-1 px-3 py-2 rounded-xl bg-secondary border border-border focus:border-primary/50 focus:outline-none text-sm" />
-                  <button onClick={() => removeLink(i)} className="text-muted-foreground hover:text-red-400 transition-colors">
+                  <button onClick={() => removeLink(i)} className="text-muted-foreground hover:text-danger transition-colors">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>

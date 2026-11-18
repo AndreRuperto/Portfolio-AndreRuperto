@@ -3,10 +3,10 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { label: "Home", href: "#" },
+  { label: "Início", href: "#" },
   { label: "Sobre mim", href: "#about" },
   { label: "Currículo", href: "#resume" },
-  { label: "Skills", href: "#skills" },
+  { label: "Habilidades", href: "#skills" },
   { label: "Projetos", href: "#projects" },
   { label: "Vitrine Digital", href: "#why-site" },
   { label: "Diferenciais", href: "#differentials" },
@@ -62,7 +62,7 @@ const Header = () => {
           <button
             className="lg:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Abrir ou fechar o menu"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />

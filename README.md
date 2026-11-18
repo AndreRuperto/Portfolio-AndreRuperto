@@ -73,6 +73,13 @@ src/
 └── lib/            # Utilitários e configurações
 ```
 
+## Identidade e sistema de design
+
+A prancha de identidade (cores, tipografia, estados, voz, componentes e telas no celular) fica no claude.ai:
+https://claude.ai/artifact/9S36CXLu9YPj8gVrEPKZZM
+
+Os tokens de `src/index.css` e `tailwind.config.ts` seguem essa prancha. Se mudar algo no código, atualize a prancha.
+
 ## Contato
 
 - **Email**: andreruperto@gmail.com

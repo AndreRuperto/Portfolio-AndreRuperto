@@ -117,7 +117,7 @@ const WhatsAppButton = () => {
                     </span>
                   ) : (
                     <>
-                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block" />
+                      <span className="w-1.5 h-1.5 bg-success rounded-full inline-block" />
                       Online
                     </>
                   )}

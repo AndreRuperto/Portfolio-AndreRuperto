@@ -197,7 +197,7 @@ const ProjectsSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <span className="section-title">Portfólio</span>
+            <span className="section-title">Projetos</span>
             <h2 className="heading-md">
               Projetos <span className="text-gradient">Recentes</span>
             </h2>
