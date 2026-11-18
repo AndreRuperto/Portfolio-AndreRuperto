@@ -79,7 +79,7 @@ function SortableProjectRow({
         <button onClick={onEdit} className="p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
           <Pencil className="w-4 h-4" />
         </button>
-        <button onClick={onDelete} className="p-2 rounded-lg text-muted-foreground hover:text-red-400 hover:bg-red-400/10 transition-colors">
+        <button onClick={onDelete} className="p-2 rounded-lg text-muted-foreground hover:text-danger hover:bg-danger/10 transition-colors">
           <Trash2 className="w-4 h-4" />
         </button>
       </div>

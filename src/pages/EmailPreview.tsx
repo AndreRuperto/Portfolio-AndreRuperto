@@ -125,9 +125,9 @@ const EmailPreview = () => {
             <div className="bg-secondary/50 p-4 border-b border-border">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <div className="flex gap-1">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-danger"></div>
+                  <div className="w-3 h-3 rounded-full bg-warning"></div>
+                  <div className="w-3 h-3 rounded-full bg-success"></div>
                 </div>
                 <span className="ml-2">
                   {activeTemplate === "notification"
@@ -148,8 +148,8 @@ const EmailPreview = () => {
           </div>
 
           {/* Info Box */}
-          <div className="mt-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-            <p className="text-sm text-blue-600 dark:text-blue-400">
+          <div className="mt-6 p-4 rounded-xl bg-info/10 border border-info/30">
+            <p className="text-sm text-info">
               <strong>💡 Dica:</strong> Estes são os templates que serão enviados automaticamente
               quando alguém preencher o formulário de contato do seu portfolio.
             </p>

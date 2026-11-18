@@ -1,8 +1,8 @@
 // TestimonialsSection.tsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Quote, Star, Linkedin } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
-import { recommendations, LINKEDIN_RECOMMENDATIONS_URL, type Recommendation } from "@/data/recommendations";
+import { recommendations, LINKEDIN_RECOMMENDATIONS_URL } from "@/data/recommendations";
 
 interface Testimonial {
   id: number;
@@ -33,8 +33,10 @@ const ExpandableText = ({ text }: { text: string }) => {
       </blockquote>
       {isLong && (
         <button
+          type="button"
           onClick={() => setExpanded(e => !e)}
-          className="mt-2 text-sm text-primary hover:underline"
+          aria-expanded={expanded}
+          className="mt-1 min-h-11 text-sm text-primary hover:underline"
         >
           {expanded ? "Ler menos" : "Ler mais"}
         </button>
@@ -43,34 +45,47 @@ const ExpandableText = ({ text }: { text: string }) => {
   );
 };
 
-const RecommendationCard = ({ item }: { item: Recommendation }) => (
+interface TestimonialCardProps {
+  /** Canto superior direito: nota em estrelas (cliente) ou data (LinkedIn) */
+  meta?: ReactNode;
+  text: string;
+  photo?: string | null;
+  author?: string | null;
+  /** Linha de apoio: cargo, empresa ou título no LinkedIn */
+  detail?: ReactNode;
+  /** Relação com o André: projeto do cliente ou vínculo de trabalho */
+  relation?: ReactNode;
+}
+
+// Cartão único de depoimento (prancha de identidade › Componentes › Cartões)
+const TestimonialCard = ({ meta, text, photo, author, detail, relation }: TestimonialCardProps) => (
   <figure className="h-full flex flex-col bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-colors">
     <div className="flex items-center justify-between mb-4">
       <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-        <Quote className="w-5 h-5 text-primary" />
+        <Quote className="w-5 h-5 text-primary" aria-hidden="true" />
       </div>
-      <span className="text-xs text-muted-foreground">{item.date}</span>
+      {meta}
     </div>
 
-    <ExpandableText text={item.text} />
+    <ExpandableText text={text} />
 
     <figcaption className="mt-6 pt-4 border-t border-border flex items-center gap-3">
-      {item.photo ? (
+      {photo ? (
         <img
-          src={item.photo}
-          alt={item.author}
+          src={photo}
+          alt={author ?? "Cliente"}
           loading="lazy"
           className="w-12 h-12 rounded-full object-cover border-2 border-primary/40 flex-shrink-0"
         />
-      ) : (
-        <div className="w-12 h-12 rounded-full bg-secondary border-2 border-primary/40 flex items-center justify-center flex-shrink-0 font-bold text-primary">
-          {initials(item.author)}
+      ) : author ? (
+        <div aria-hidden="true" className="w-12 h-12 rounded-full bg-secondary border-2 border-primary/40 flex items-center justify-center flex-shrink-0 font-bold text-primary">
+          {initials(author)}
         </div>
-      )}
+      ) : null}
       <div className="min-w-0">
-        <p className="font-semibold text-foreground">{item.author}</p>
-        <p className="text-sm text-muted-foreground line-clamp-1" title={item.headline}>{item.headline}</p>
-        <p className="text-xs text-primary">{item.relation}</p>
+        {author && <p className="font-semibold text-foreground">{author}</p>}
+        {detail && <p className="text-sm text-muted-foreground line-clamp-1">{detail}</p>}
+        {relation && <p className="text-xs text-primary">{relation}</p>}
       </div>
     </figcaption>
   </figure>
@@ -115,42 +130,20 @@ const TestimonialsSection = () => {
             }`}>
               {items.map((item, i) => (
                 <ScrollReveal key={item.id} delay={i * 100} className="h-full">
-                  <figure className="h-full flex flex-col bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-colors">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                        <Quote className="w-5 h-5 text-primary" />
+                  <TestimonialCard
+                    meta={item.testimonialRating ? (
+                      <div className="flex gap-0.5" role="img" aria-label={`Nota ${item.testimonialRating} de 5`}>
+                        {[1, 2, 3, 4, 5].map(n => (
+                          <Star key={n} aria-hidden="true" className={`w-4 h-4 ${n <= item.testimonialRating! ? "fill-primary text-primary" : "text-muted-foreground/40"}`} />
+                        ))}
                       </div>
-                      {item.testimonialRating && (
-                        <div className="flex gap-0.5" aria-label={`Nota ${item.testimonialRating} de 5`}>
-                          {[1, 2, 3, 4, 5].map(n => (
-                            <Star key={n} className={`w-4 h-4 ${n <= item.testimonialRating! ? "fill-primary text-primary" : "text-muted-foreground/40"}`} />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <ExpandableText text={item.testimonialText!} />
-
-                    <figcaption className="mt-6 pt-4 border-t border-border flex items-center gap-3">
-                      {item.testimonialPhoto && (
-                        <img
-                          src={item.testimonialPhoto}
-                          alt={item.testimonialAuthor ?? "Cliente"}
-                          loading="lazy"
-                          className="w-12 h-12 rounded-full object-cover border-2 border-primary/40 flex-shrink-0"
-                        />
-                      )}
-                      <div>
-                        {item.testimonialAuthor && (
-                          <p className="font-semibold text-foreground">{item.testimonialAuthor}</p>
-                        )}
-                        <p className="text-sm text-muted-foreground">
-                          {item.testimonialRole ? `${item.testimonialRole} · ` : ""}
-                          <span className="text-primary">{item.title}</span>
-                        </p>
-                      </div>
-                    </figcaption>
-                  </figure>
+                    ) : undefined}
+                    text={item.testimonialText!}
+                    photo={item.testimonialPhoto}
+                    author={item.testimonialAuthor}
+                    detail={item.testimonialRole}
+                    relation={item.title}
+                  />
                 </ScrollReveal>
               ))}
             </div>
@@ -160,13 +153,20 @@ const TestimonialsSection = () => {
         {/* Recomendações do LinkedIn */}
         <div className="max-w-6xl mx-auto">
           <h3 className="text-lg font-semibold mb-6 text-center flex items-center justify-center gap-2">
-            <Linkedin className="w-5 h-5 text-primary" />
+            <Linkedin className="w-5 h-5 text-primary" aria-hidden="true" />
             Recomendações no LinkedIn
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {recommendations.map((item, i) => (
               <ScrollReveal key={item.author} delay={i * 100} className="h-full">
-                <RecommendationCard item={item} />
+                <TestimonialCard
+                  meta={<span className="text-xs font-mono text-muted-foreground">{item.date}</span>}
+                  text={item.text}
+                  photo={item.photo}
+                  author={item.author}
+                  detail={<span title={item.headline}>{item.headline}</span>}
+                  relation={item.relation}
+                />
               </ScrollReveal>
             ))}
           </div>

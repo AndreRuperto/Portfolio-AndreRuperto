@@ -13,9 +13,9 @@ const GithubActivity: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <span className="section-title">Github</span>
+            <span className="section-title">GitHub</span>
             <h2 className="heading-md">
-              Atividade <span className="text-gradient">Github</span>
+              Atividade no <span className="text-gradient">GitHub</span>
             </h2>
           </div>
         </ScrollReveal>

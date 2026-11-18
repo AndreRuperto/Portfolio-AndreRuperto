@@ -161,23 +161,23 @@ const ContactSection = () => {
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    Enviar Mensagem
+                    Enviar mensagem
                   </>
                 )}
               </Button>
 
               {/* Status Messages */}
               {submitStatus === 'success' && (
-                <div className="flex items-center gap-2 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500">
+                <div className="flex items-center gap-2 p-4 rounded-xl bg-success/10 border border-success/30 text-success">
                   <CheckCircle className="w-5 h-5" />
-                  <span>Mensagem enviada com sucesso! Responderei em breve.</span>
+                  <span>Mensagem enviada. Recebi seu contato e respondo por e-mail.</span>
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="flex items-center gap-2 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500">
+                <div className="flex items-center gap-2 p-4 rounded-xl bg-danger/10 border border-danger/30 text-danger">
                   <XCircle className="w-5 h-5" />
-                  <span>Erro ao enviar mensagem. Tente novamente ou use o email direto.</span>
+                  <span>A mensagem não foi enviada. Tente de novo ou escreva para contato@andreruperto.dev.</span>
                 </div>
               )}
             </form>

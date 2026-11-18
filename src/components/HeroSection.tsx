@@ -67,7 +67,7 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-secondary border border-border animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-              <span className="text-xs md:text-sm text-muted-foreground">Vamos construir algo incrível juntos!</span>
+              <span className="text-xs md:text-sm text-muted-foreground">Aberto a novos projetos</span>
             </div>
 
             {/* Name */}
@@ -107,7 +107,7 @@ const HeroSection = () => {
                 <Button variant="heroOutline" size="lg" className="flex-1 sm:flex-none" asChild>
                   <a href="https://drive.google.com/uc?export=download&id=1nyU8pIJYEYEi04gMoPSr9gmjX8L4yl7L" download>
                     <Download className="w-4 h-4" />
-                    Download Currículo
+                    Baixar currículo
                   </a>
                 </Button>
               </div>
@@ -117,6 +117,7 @@ const HeroSection = () => {
             <div className="flex gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.5s" }}>
               <a
                 href="https://github.com/AndreRuperto"
+                aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-secondary border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300"
@@ -125,6 +126,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="https://linkedin.com/in/andrerup"
+                aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-secondary border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300"
@@ -133,6 +135,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="https://instagram.com/andreruperto.dev"
+                aria-label="Instagram"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-full bg-secondary border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300"
