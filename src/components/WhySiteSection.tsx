@@ -126,7 +126,7 @@ const WhySiteSection = () => {
 
         <ScrollReveal variant="scale" delay={200}>
         <div className="mt-10 md:mt-16 max-w-3xl mx-auto text-center">
-          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20">
+          <div className="p-6 md:p-8 rounded-2xl bg-card border border-border">
             <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">
               Pronto para transformar sua presença digital?
             </h3>

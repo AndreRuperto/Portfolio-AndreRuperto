@@ -47,7 +47,6 @@ const AboutSection = () => {
             <div className="relative flex justify-center">
               <div className="relative">
                 {/* Background decoration */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
 
                 {/* Main image */}
                 <div className="relative bg-card rounded-3xl p-4 sm:p-6 md:p-8 border border-border transition-all duration-500">

@@ -190,7 +190,6 @@ const ContactSection = () => {
           <div className="flex justify-center lg:justify-end">
           <div className="flex flex-col gap-4 w-fit">
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl" />
               <div className="relative bg-card rounded-3xl p-8 border border-border">
                 <img
                   src={memojiThinking}

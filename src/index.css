@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+@import '../docs/design/tokens.css';
 
 @tailwind base;
 @tailwind components;
@@ -83,6 +84,21 @@
     outline-offset: 2px;
   }
 
+  /* Âncoras não ficam escondidas atrás do cabeçalho fixo (foco e rolagem) */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee,
+    .animate-marquee {
+      animation: none !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   ::selection {
     background-color: hsl(var(--primary) / 0.3);
     color: hsl(var(--foreground));
@@ -90,17 +106,18 @@
 }
 
 @layer components {
+  /* v2 do sistema de design (docs/design/DESIGN.md): sem gradiente, glow nem vidro.
+     As classes continuam existindo para não quebrar os componentes, mas agora são sólidas. */
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-warm);
+    color: var(--cor-texto-destaque);
   }
 
   .glow-warm {
-    box-shadow: var(--shadow-warm);
+    box-shadow: none;
   }
 
   .card-gradient {
-    background: var(--gradient-card);
+    background: var(--cor-fundo-superficie);
   }
 
   .marquee {
@@ -112,7 +129,8 @@
   }
 
   .glass {
-    @apply backdrop-blur-md bg-background/80 border border-border/50;
+    background: var(--cor-fundo-base);
+    border: 1px solid var(--cor-borda-padrao);
   }
 
   .hover-lift {

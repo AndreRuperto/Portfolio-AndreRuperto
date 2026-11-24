@@ -3,14 +3,13 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { label: "Início", href: "#" },
-  { label: "Sobre mim", href: "#about" },
-  { label: "Currículo", href: "#resume" },
-  { label: "Habilidades", href: "#skills" },
-  { label: "Projetos", href: "#projects" },
-  { label: "Vitrine Digital", href: "#why-site" },
-  { label: "Diferenciais", href: "#differentials" },
-  { label: "Contato", href: "#contact" },
+  { label: "Início", href: "/#" },
+  { label: "Projetos", href: "/#projects" },
+  { label: "Experiência", href: "/#resume" },
+  { label: "Habilidades", href: "/#skills" },
+  { label: "Sobre", href: "/#about" },
+  { label: "Contato", href: "/#contact" },
+  { label: "Serviços", href: "/servicos" },
 ];
 
 const Header = () => {
@@ -34,8 +33,8 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="text-2xl font-extrabold tracking-tighter text-gradient">
-            André<span className="text-foreground">.</span>
+          <a href="/" className="text-2xl font-bold tracking-tighter text-foreground">
+            André<span className="text-primary">.</span>
           </a>
 
           {/* Desktop nav */}
@@ -53,8 +52,8 @@ const Header = () => {
 
           {/* CTA */}
           <div className="hidden lg:block">
-            <Button variant="hero" size="sm" asChild>
-              <a href="mailto:contato@andreruperto.dev">Vamos conversar</a>
+            <Button variant="heroOutline" size="sm" asChild>
+              <a href="/#contact">Falar comigo</a>
             </Button>
           </div>
 
@@ -81,13 +80,13 @@ const Header = () => {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="min-h-11 flex items-center text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {item.label}
                 </a>
               ))}
-              <Button variant="hero" size="sm" className="mt-2" asChild>
-                <a href="mailto:contato@andreruperto.dev">Vamos conversar</a>
+              <Button variant="heroOutline" size="sm" className="mt-2" asChild>
+                <a href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>Falar comigo</a>
               </Button>
             </div>
           </nav>
