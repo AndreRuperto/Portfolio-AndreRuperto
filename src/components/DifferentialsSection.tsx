@@ -58,7 +58,6 @@ const DifferentialsSection = () => {
                 className="group relative h-full bg-card rounded-2xl border border-border p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div className="relative space-y-4">
                   {/* Icon */}
