@@ -1,5 +1,5 @@
 // src/components/ProjectsSection.tsx
-import { ExternalLink, Github, Eye, X, ChevronsDown, ChevronDown, Quote } from "lucide-react";
+import { ExternalLink, Github, Eye, X, ChevronsDown, ChevronDown, Quote, Database, FileText, MessageCircle, Gamepad2, Box, Building2, Brain, Code2, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import memojiFist from "@/assets/images/memoji-fist.png";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -158,6 +158,33 @@ function FullPageViewer({ src, onClose }: { src: string; onClose: () => void }) 
   );
 }
 
+// Capa para card sem imagem: mesma altura do bloco da imagem (h-60 + 2 px de borda), para os cards da mesma linha ficarem alinhados.
+const ICONES: [RegExp, LucideIcon][] = [
+  [/escrit[oó]rio|estudo de caso/i, Building2],
+  [/documenta/i, FileText],
+  [/whatsapp/i, MessageCircle],
+  [/pac-?man|jogo/i, Gamepad2],
+  [/3d/i, Box],
+  [/machine learning|\bml\b|random forest|xgboost/i, Brain],
+  [/airflow|databricks|sql|etl|dados/i, Database],
+];
+
+function CapaSemImagem({ project }: { project: Project }) {
+  const texto = `${project.title} ${(project.tags || []).join(" ")}`;
+  const Icone = ICONES.find(([re]) => re.test(texto))?.[1] ?? Code2;
+  return (
+    <div
+      aria-hidden="true"
+      className="mb-4 h-[calc(15rem+2px)] rounded-lg border border-border/50 relative overflow-hidden flex items-center justify-center bg-[radial-gradient(circle_at_50%_40%,hsl(var(--primary)/0.14),transparent_65%)]"
+    >
+      <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] bg-[size:24px_24px]" />
+      <span className="relative flex items-center justify-center w-16 h-16 rounded-2xl border border-primary/30 bg-primary/10">
+        <Icone className="w-8 h-8 text-primary" strokeWidth={1.75} />
+      </span>
+    </div>
+  );
+}
+
 const ProjectsSection = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [openImage, setOpenImage] = useState<string | null>(null);
@@ -234,6 +261,7 @@ const ProjectsSection = () => {
                     </button>
                   </div>
                 )}
+                {!project.image && <CapaSemImagem project={project} />}
 
                 <h3 className="text-xl font-bold mb-3">{project.title}</h3>
                 <p className="text-muted-foreground mb-4">{project.description}</p>
