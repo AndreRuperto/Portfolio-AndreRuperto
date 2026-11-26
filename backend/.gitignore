@@ -3,3 +3,6 @@ node_modules
 .env
 
 /generated/prisma
+
+# Chrome baixado pelo Puppeteer (.puppeteerrc.cjs)
+.cache/
